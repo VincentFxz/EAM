@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user
+END
+PBUserTagService.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserTagService.class
+END
+PBUserGroupService.class
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserGroupService.class
+END
+PBGroupActionRel.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBGroupActionRel.class
+END
+PBUserActionService.class
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserActionService.class
+END
+PBUserTagRelService.class
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserTagRelService.class
+END
+PBUserGroupRelService.class
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserGroupRelService.class
+END
+PBUserService.class
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserService.class
+END
+PBGroupResActionService.class
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBGroupResActionService.class
+END
+PBUserResActionService.class
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBUserResActionService.class
+END
+PBGroupResourceRelService.class
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/chinasofti/umc/service/user/PBGroupResourceRelService.class
+END

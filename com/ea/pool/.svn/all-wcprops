@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/pool
+END
+myPool.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/pool/myPool.class
+END
+tablePool.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/pool/tablePool.class
+END
+poolMan.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/pool/poolMan.class
+END

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+        
+<hibernate-mapping> 
+
+    <class name="com.ea.pub.tableDefine" table="Table_Define"> 
+        <id name="eid">  </id>
+        <property name="name"/> 
+        <property name="cname"/>
+        <property name="delflag"/>
+        <property name=""/>
+        <property name="cname"/>
+        <property name="cname"/>
+           
+    </class> 
+
+</hibernate-mapping>

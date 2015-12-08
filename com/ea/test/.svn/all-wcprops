@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test
+END
+testQrcode.class
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/testQrcode.class
+END
+User.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/User.class
+END
+test.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/test.class
+END
+ChnToPinYin.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/ChnToPinYin.class
+END
+UserDao.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/UserDao.class
+END
+pinYin.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/pinYin.class
+END
+mybatisTest.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/mybatisTest.class
+END
+getTables.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/getTables.class
+END
+paresSQL.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ea/test/paresSQL.class
+END

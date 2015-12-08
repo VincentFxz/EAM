@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio
+END
+webChat.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio/webChat.class
+END
+WebSocketMessageServlet.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio/WebSocketMessageServlet.class
+END
+WebSocketMessageInboundPool.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio/WebSocketMessageInboundPool.class
+END
+webChat$ChatMessageInbound.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio/webChat$ChatMessageInbound.class
+END
+WebSocketMessageInbound.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/EATools/!svn/ver/1/WEB-INF/classes/com/ibcio/WebSocketMessageInbound.class
+END
