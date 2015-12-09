@@ -71,14 +71,15 @@ public class GenTableController extends BaseController {
 		List<GenTable> tableList = genTableService.findTableListFormDb(new GenTable());
 		model.addAttribute("tableList", tableList);
 		// 验证表是否存在
-		if (StringUtils.isBlank(genTable.getId()) && !genTableService.checkTableName(genTable.getName())){
-			addMessage(model, "下一步失败！" + genTable.getName() + " 表已经添加！");
-			genTable.setName("");
-		}
-		// 获取物理表字段
-		else{
-			genTable = genTableService.getTableFormDb(genTable);
-		}
+//		if (StringUtils.isBlank(genTable.getId()) && !genTableService.checkTableName(genTable.getName())){
+//			addMessage(model, "下一步失败！" + genTable.getName() + " 表已经添加！");
+//			genTable.setName("");
+//		}
+//		// 获取物理表字段
+//		else{
+//			genTable = genTableService.getTableFormDb(genTable);
+//		}
+		genTable = genTableService.getTableFormDb(genTable);
 		model.addAttribute("genTable", genTable);
 		model.addAttribute("config", GenUtils.getConfig());
 		return "modules/gen/genTableForm";

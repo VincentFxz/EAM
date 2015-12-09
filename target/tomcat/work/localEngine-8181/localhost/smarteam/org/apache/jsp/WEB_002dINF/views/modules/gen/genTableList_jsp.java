@@ -229,7 +229,7 @@ static {
         out.write("\n");
         out.write("        <li><a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write("/gen/genTable/form\">业务表添加</a></li>\n");
+        out.write("/gen/genTable/form\">业务表绑定</a></li>\n");
         out.write("    ");
         int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -559,10 +559,12 @@ static {
       do {
         out.write("\n");
         out.write("                <td>\n");
+        out.write("                    ");
+        out.write("\n");
         out.write("                    <a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write("/gen/genTable/form?id=");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("/gen/genTable/form?name=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.name}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
         out.write("\">修改</a>\n");
         out.write("                    <a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
@@ -570,6 +572,11 @@ static {
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
         out.write("\"\n");
         out.write("                       onclick=\"return confirmx('确认要删除该业务表吗？', this.href)\">删除</a>\n");
+        out.write("                    <a href=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("/gen/genTable/create?id=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("\">修改</a>\n");
         out.write("                </td>\n");
         out.write("            ");
         int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f2.doAfterBody();

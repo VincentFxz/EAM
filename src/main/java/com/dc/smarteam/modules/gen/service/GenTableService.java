@@ -54,7 +54,7 @@ public class GenTableService extends BaseService {
 	
 	public Page<GenTable> find(Page<GenTable> page, GenTable genTable) {
 		genTable.setPage(page);
-		page.setList(genTableDao.findList(genTable));
+		page.setList(genDataBaseDictDao.findTableList(genTable));
 		return page;
 	}
 
