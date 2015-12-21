@@ -24,8 +24,8 @@
 			ORDER BY t.name
 		</if>
 		<if test="dbName == 'mysql'">			
-			SELECT t.table_name AS name,t.TABLE_COMMENT AS comments 
-			FROM information_schema.`TABLES` t 
+			SELECT t.table_name AS name,t.TABLE_COMMENT as comments, g.class_name ,g.parent_table, g.table_status
+			FROM information_schema.`TABLES` t LEFT JOIN gen_table g on t.table_name = g.name
 			WHERE t.TABLE_SCHEMA = (select database())
 			<if test="name != null and name != ''">
 				AND t.TABLE_NAME = upper(#{name})

@@ -918,12 +918,13 @@
 				<version>2.4</version>
 			</plugin>
 			
-			<!-- clean插件 -->
+			<!-- clean插件 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
 			</plugin>
+-->
 			
 			<!-- ant插件 -->
 			<plugin>

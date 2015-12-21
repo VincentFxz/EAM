@@ -20,7 +20,10 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="${ctx}/gen/genTable/">业务表列表</a></li>
     <shiro:hasPermission name="gen:genTable:edit">
-        <li><a href="${ctx}/gen/genTable/form">业务表添加</a></li>
+        <li><a href="${ctx}/gen/genTable/form">业务表绑定</a></li>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="gen:genTable:edit">
+        <li><a href="${ctx}/gen/genTable/form">业务表创建</a></li>
     </shiro:hasPermission>
 </ul>
 <form:form id="searchForm" modelAttribute="genTable" action="${ctx}/gen/genTable/" method="post"
@@ -52,17 +55,19 @@
             <td><a href="${ctx}/gen/genTable/form?id=${genTable.id}">${genTable.name}</a></td>
             <td>${genTable.comments}</td>
             <td>${genTable.className}</td>
-            <td>${fns:getDictLabel(genTable.tableStatus, 'table_status', '')}</td>
+            <td>${fns:getDictLabel(genTable.tableStatus, 'table_status', '2')}</td>
 
             <td title="点击查询子表"><a href="javascript:"
                                   onclick="$('#parentTable').val('${genTable.parentTable}');$('#searchForm').submit();">${genTable.parentTable}</a>
             </td>
             <shiro:hasPermission name="gen:genTable:edit">
                 <td>
+                    <%--<a href="${ctx}/gen/genTable/form?id=${genTable.id}">修改</a>--%>
                     <a href="${ctx}/gen/genTable/form?id=${genTable.id}">修改</a>
                     <a href="${ctx}/gen/genTable/delete?id=${genTable.id}"
                        onclick="return confirmx('确认要删除该业务表吗？', this.href)">删除</a>
-                    <a href="${ctx}/gen/genTable/create?id=${genTable.id}">修改</a>
+                    <a href="${ctx}/gen/genTable/create?id=${genTable.id}">创建</a>
+                    <a href="${ctx}/gen/genTable/create?id=${genTable.id}">绑定</a>
                 </td>
             </shiro:hasPermission>
         </tr>

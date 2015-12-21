@@ -70,6 +70,7 @@ public class GenTableController extends BaseController {
 		// 获取物理表列表
 		List<GenTable> tableList = genTableService.findTableListFormDb(new GenTable());
 		model.addAttribute("tableList", tableList);
+		//去除判断，总是获取所有的表
 		// 验证表是否存在
 //		if (StringUtils.isBlank(genTable.getId()) && !genTableService.checkTableName(genTable.getName())){
 //			addMessage(model, "下一步失败！" + genTable.getName() + " 表已经添加！");

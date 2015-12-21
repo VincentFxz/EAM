@@ -126,6 +126,10 @@ static {
       if (_jspx_meth_shiro_005fhasPermission_005f0(_jspx_page_context))
         return;
       out.write("\n");
+      out.write("    ");
+      if (_jspx_meth_shiro_005fhasPermission_005f1(_jspx_page_context))
+        return;
+      out.write("\n");
       out.write("</ul>\n");
       if (_jspx_meth_form_005fform_005f0(_jspx_page_context))
         return;
@@ -142,7 +146,7 @@ static {
       out.write("        <th class=\"sort-column parent_table\">状态</th>\n");
       out.write("        <th class=\"sort-column parent_table\">父表</th>\n");
       out.write("        ");
-      if (_jspx_meth_shiro_005fhasPermission_005f1(_jspx_page_context))
+      if (_jspx_meth_shiro_005fhasPermission_005f2(_jspx_page_context))
         return;
       out.write("</tr>\n");
       out.write("    </thead>\n");
@@ -244,6 +248,37 @@ static {
     return false;
   }
 
+  private boolean _jspx_meth_shiro_005fhasPermission_005f1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  shiro:hasPermission
+    org.apache.shiro.web.tags.HasPermissionTag _jspx_th_shiro_005fhasPermission_005f1 = (org.apache.shiro.web.tags.HasPermissionTag) _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.get(org.apache.shiro.web.tags.HasPermissionTag.class);
+    _jspx_th_shiro_005fhasPermission_005f1.setPageContext(_jspx_page_context);
+    _jspx_th_shiro_005fhasPermission_005f1.setParent(null);
+    // /WEB-INF/views/modules/gen/genTableList.jsp(25,4) name = name type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_shiro_005fhasPermission_005f1.setName("gen:genTable:edit");
+    int _jspx_eval_shiro_005fhasPermission_005f1 = _jspx_th_shiro_005fhasPermission_005f1.doStartTag();
+    if (_jspx_eval_shiro_005fhasPermission_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\n");
+        out.write("        <li><a href=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("/gen/genTable/form\">业务表创建</a></li>\n");
+        out.write("    ");
+        int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_shiro_005fhasPermission_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f1);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f1);
+    return false;
+  }
+
   private boolean _jspx_meth_form_005fform_005f0(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -252,15 +287,15 @@ static {
     org.springframework.web.servlet.tags.form.FormTag _jspx_th_form_005fform_005f0 = (org.springframework.web.servlet.tags.form.FormTag) _005fjspx_005ftagPool_005fform_005fform_0026_005fmodelAttribute_005fmethod_005fid_005fclass_005faction.get(org.springframework.web.servlet.tags.form.FormTag.class);
     _jspx_th_form_005fform_005f0.setPageContext(_jspx_page_context);
     _jspx_th_form_005fform_005f0.setParent(null);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(26,0) name = id type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(29,0) name = id type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005fform_005f0.setId("searchForm");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(26,0) name = modelAttribute type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(29,0) name = modelAttribute type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005fform_005f0.setModelAttribute("genTable");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(26,0) name = action type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(29,0) name = action type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005fform_005f0.setAction((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}/gen/genTable/", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-    // /WEB-INF/views/modules/gen/genTableList.jsp(26,0) name = method type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(29,0) name = method type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005fform_005f0.setMethod("post");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(26,0) null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(29,0) null
     _jspx_th_form_005fform_005f0.setDynamicAttribute(null, "class", new String("breadcrumb form-search"));
     int[] _jspx_push_body_count_form_005fform_005f0 = new int[] { 0 };
     try {
@@ -319,13 +354,13 @@ static {
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_sys_005ftableSort_005f0);
     _jspx_th_sys_005ftableSort_005f0.setJspContext(_jspx_page_context);
     _jspx_th_sys_005ftableSort_005f0.setParent(_jspx_th_form_005fform_005f0);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(30,4) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(33,4) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_sys_005ftableSort_005f0.setId("orderBy");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(30,4) name = name type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(33,4) name = name type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_sys_005ftableSort_005f0.setName("orderBy");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(30,4) name = value type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(33,4) name = value type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_sys_005ftableSort_005f0.setValue((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${page.orderBy}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-    // /WEB-INF/views/modules/gen/genTableList.jsp(30,4) name = callback type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(33,4) name = callback type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_sys_005ftableSort_005f0.setCallback("page();");
     _jspx_th_sys_005ftableSort_005f0.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_sys_005ftableSort_005f0);
@@ -340,13 +375,13 @@ static {
     org.springframework.web.servlet.tags.form.InputTag _jspx_th_form_005finput_005f0 = (org.springframework.web.servlet.tags.form.InputTag) _005fjspx_005ftagPool_005fform_005finput_0026_005fpath_005fmaxlength_005fhtmlEscape_005fclass_005fnobody.get(org.springframework.web.servlet.tags.form.InputTag.class);
     _jspx_th_form_005finput_005f0.setPageContext(_jspx_page_context);
     _jspx_th_form_005finput_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_form_005fform_005f0);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(31,22) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(34,22) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f0.setPath("nameLike");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(31,22) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(34,22) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f0.setHtmlEscape(false);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(31,22) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(34,22) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f0.setMaxlength("50");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(31,22) null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(34,22) null
     _jspx_th_form_005finput_005f0.setDynamicAttribute(null, "class", new String("input-medium"));
     int[] _jspx_push_body_count_form_005finput_005f0 = new int[] { 0 };
     try {
@@ -373,13 +408,13 @@ static {
     org.springframework.web.servlet.tags.form.InputTag _jspx_th_form_005finput_005f1 = (org.springframework.web.servlet.tags.form.InputTag) _005fjspx_005ftagPool_005fform_005finput_0026_005fpath_005fmaxlength_005fhtmlEscape_005fclass_005fnobody.get(org.springframework.web.servlet.tags.form.InputTag.class);
     _jspx_th_form_005finput_005f1.setPageContext(_jspx_page_context);
     _jspx_th_form_005finput_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_form_005fform_005f0);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(32,22) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(35,22) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f1.setPath("comments");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(32,22) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(35,22) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f1.setHtmlEscape(false);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(32,22) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(35,22) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f1.setMaxlength("50");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(32,22) null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(35,22) null
     _jspx_th_form_005finput_005f1.setDynamicAttribute(null, "class", new String("input-medium"));
     int[] _jspx_push_body_count_form_005finput_005f1 = new int[] { 0 };
     try {
@@ -406,13 +441,13 @@ static {
     org.springframework.web.servlet.tags.form.InputTag _jspx_th_form_005finput_005f2 = (org.springframework.web.servlet.tags.form.InputTag) _005fjspx_005ftagPool_005fform_005finput_0026_005fpath_005fmaxlength_005fhtmlEscape_005fclass_005fnobody.get(org.springframework.web.servlet.tags.form.InputTag.class);
     _jspx_th_form_005finput_005f2.setPageContext(_jspx_page_context);
     _jspx_th_form_005finput_005f2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_form_005fform_005f0);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(33,24) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(36,24) name = path type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f2.setPath("parentTable");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(33,24) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(36,24) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f2.setHtmlEscape(false);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(33,24) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(36,24) name = maxlength type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_form_005finput_005f2.setMaxlength("50");
-    // /WEB-INF/views/modules/gen/genTableList.jsp(33,24) null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(36,24) null
     _jspx_th_form_005finput_005f2.setDynamicAttribute(null, "class", new String("input-medium"));
     int[] _jspx_push_body_count_form_005finput_005f2 = new int[] { 0 };
     try {
@@ -439,39 +474,39 @@ static {
     org.apache.jsp.tag.web.sys.message_tag _jspx_th_sys_005fmessage_005f0 = new org.apache.jsp.tag.web.sys.message_tag();
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_sys_005fmessage_005f0);
     _jspx_th_sys_005fmessage_005f0.setJspContext(_jspx_page_context);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(36,0) name = content type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(39,0) name = content type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_sys_005fmessage_005f0.setContent((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${message}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
     _jspx_th_sys_005fmessage_005f0.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_sys_005fmessage_005f0);
     return false;
   }
 
-  private boolean _jspx_meth_shiro_005fhasPermission_005f1(PageContext _jspx_page_context)
+  private boolean _jspx_meth_shiro_005fhasPermission_005f2(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  shiro:hasPermission
-    org.apache.shiro.web.tags.HasPermissionTag _jspx_th_shiro_005fhasPermission_005f1 = (org.apache.shiro.web.tags.HasPermissionTag) _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.get(org.apache.shiro.web.tags.HasPermissionTag.class);
-    _jspx_th_shiro_005fhasPermission_005f1.setPageContext(_jspx_page_context);
-    _jspx_th_shiro_005fhasPermission_005f1.setParent(null);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(45,8) name = name type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_shiro_005fhasPermission_005f1.setName("gen:genTable:edit");
-    int _jspx_eval_shiro_005fhasPermission_005f1 = _jspx_th_shiro_005fhasPermission_005f1.doStartTag();
-    if (_jspx_eval_shiro_005fhasPermission_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+    org.apache.shiro.web.tags.HasPermissionTag _jspx_th_shiro_005fhasPermission_005f2 = (org.apache.shiro.web.tags.HasPermissionTag) _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.get(org.apache.shiro.web.tags.HasPermissionTag.class);
+    _jspx_th_shiro_005fhasPermission_005f2.setPageContext(_jspx_page_context);
+    _jspx_th_shiro_005fhasPermission_005f2.setParent(null);
+    // /WEB-INF/views/modules/gen/genTableList.jsp(48,8) name = name type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_shiro_005fhasPermission_005f2.setName("gen:genTable:edit");
+    int _jspx_eval_shiro_005fhasPermission_005f2 = _jspx_th_shiro_005fhasPermission_005f2.doStartTag();
+    if (_jspx_eval_shiro_005fhasPermission_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\n");
         out.write("            <th>操作</th>\n");
         out.write("        ");
-        int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f1.doAfterBody();
+        int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f2.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
       } while (true);
     }
-    if (_jspx_th_shiro_005fhasPermission_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f1);
+    if (_jspx_th_shiro_005fhasPermission_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f2);
       return true;
     }
-    _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f1);
+    _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f2);
     return false;
   }
 
@@ -483,9 +518,9 @@ static {
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fforEach_005f0.setParent(null);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(50,4) name = items type = java.lang.Object reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(53,4) name = items type = java.lang.Object reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${page.list}", java.lang.Object.class, (PageContext)_jspx_page_context, null, false));
-    // /WEB-INF/views/modules/gen/genTableList.jsp(50,4) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/modules/gen/genTableList.jsp(53,4) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setVar("genTable");
     int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
     try {
@@ -509,7 +544,7 @@ static {
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.className}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
           out.write("</td>\n");
           out.write("            <td>");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${fns:getDictLabel(genTable.tableStatus, 'table_status', '')}", java.lang.String.class, (PageContext)_jspx_page_context, _jspx_fnmap_1, false));
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${fns:getDictLabel(genTable.tableStatus, 'table_status', '2')}", java.lang.String.class, (PageContext)_jspx_page_context, _jspx_fnmap_1, false));
           out.write("</td>\n");
           out.write("\n");
           out.write("            <td title=\"点击查询子表\"><a href=\"javascript:\"\n");
@@ -520,7 +555,7 @@ static {
           out.write("</a>\n");
           out.write("            </td>\n");
           out.write("            ");
-          if (_jspx_meth_shiro_005fhasPermission_005f2(_jspx_th_c_005fforEach_005f0, _jspx_page_context, _jspx_push_body_count_c_005fforEach_005f0))
+          if (_jspx_meth_shiro_005fhasPermission_005f3(_jspx_th_c_005fforEach_005f0, _jspx_page_context, _jspx_push_body_count_c_005fforEach_005f0))
             return true;
           out.write("\n");
           out.write("        </tr>\n");
@@ -544,18 +579,18 @@ static {
     return false;
   }
 
-  private boolean _jspx_meth_shiro_005fhasPermission_005f2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fforEach_005f0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_005fforEach_005f0)
+  private boolean _jspx_meth_shiro_005fhasPermission_005f3(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fforEach_005f0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_005fforEach_005f0)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  shiro:hasPermission
-    org.apache.shiro.web.tags.HasPermissionTag _jspx_th_shiro_005fhasPermission_005f2 = (org.apache.shiro.web.tags.HasPermissionTag) _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.get(org.apache.shiro.web.tags.HasPermissionTag.class);
-    _jspx_th_shiro_005fhasPermission_005f2.setPageContext(_jspx_page_context);
-    _jspx_th_shiro_005fhasPermission_005f2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fforEach_005f0);
-    // /WEB-INF/views/modules/gen/genTableList.jsp(60,12) name = name type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_shiro_005fhasPermission_005f2.setName("gen:genTable:edit");
-    int _jspx_eval_shiro_005fhasPermission_005f2 = _jspx_th_shiro_005fhasPermission_005f2.doStartTag();
-    if (_jspx_eval_shiro_005fhasPermission_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+    org.apache.shiro.web.tags.HasPermissionTag _jspx_th_shiro_005fhasPermission_005f3 = (org.apache.shiro.web.tags.HasPermissionTag) _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.get(org.apache.shiro.web.tags.HasPermissionTag.class);
+    _jspx_th_shiro_005fhasPermission_005f3.setPageContext(_jspx_page_context);
+    _jspx_th_shiro_005fhasPermission_005f3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fforEach_005f0);
+    // /WEB-INF/views/modules/gen/genTableList.jsp(63,12) name = name type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_shiro_005fhasPermission_005f3.setName("gen:genTable:edit");
+    int _jspx_eval_shiro_005fhasPermission_005f3 = _jspx_th_shiro_005fhasPermission_005f3.doStartTag();
+    if (_jspx_eval_shiro_005fhasPermission_005f3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\n");
         out.write("                <td>\n");
@@ -563,8 +598,8 @@ static {
         out.write("\n");
         out.write("                    <a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write("/gen/genTable/form?name=");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.name}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("/gen/genTable/form?id=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
         out.write("\">修改</a>\n");
         out.write("                    <a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
@@ -576,19 +611,24 @@ static {
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
         out.write("/gen/genTable/create?id=");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write("\">修改</a>\n");
+        out.write("\">创建</a>\n");
+        out.write("                    <a href=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${ctx}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("/gen/genTable/create?id=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${genTable.id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("\">绑定</a>\n");
         out.write("                </td>\n");
         out.write("            ");
-        int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f2.doAfterBody();
+        int evalDoAfterBody = _jspx_th_shiro_005fhasPermission_005f3.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
       } while (true);
     }
-    if (_jspx_th_shiro_005fhasPermission_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f2);
+    if (_jspx_th_shiro_005fhasPermission_005f3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f3);
       return true;
     }
-    _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f2);
+    _005fjspx_005ftagPool_005fshiro_005fhasPermission_0026_005fname.reuse(_jspx_th_shiro_005fhasPermission_005f3);
     return false;
   }
 }
