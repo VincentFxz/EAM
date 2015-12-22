@@ -77,6 +77,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	
 	@JsonIgnore
 	public User getCreateBy() {
+        if(null != createBy){
+            createBy = UserUtils.get(createBy.id);
+        }
 		return createBy;
 	}
 
@@ -95,6 +98,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	@JsonIgnore
 	public User getUpdateBy() {
+        if(null != updateBy){
+            updateBy = UserUtils.get(updateBy.id);
+        }
 		return updateBy;
 	}
 
