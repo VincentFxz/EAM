@@ -73,7 +73,7 @@ public class GenTableService extends BaseService {
 	
 	/**
 	 * 验证表名是否可用，如果已存在，则返回false
-	 * @param genTable
+	 * @param tableName
 	 * @return
 	 */
 	public boolean checkTableName(String tableName){
@@ -170,8 +170,19 @@ public class GenTableService extends BaseService {
 	
 	@Transactional(readOnly = false)
 	public void delete(GenTable genTable) {
+//		genTableDao.delete(genTable);
+//		genTableColumnDao.deleteByGenTableId(genTable.getId());
+
+
+
 		genTableDao.delete(genTable);
-		genTableColumnDao.deleteByGenTableId(genTable.getId());
-	}
+        // 删除列 modify by yangqjb
+        for (GenTableColumn column : genTable.getColumnList()){
+            column.setGenTable(genTable);
+            column.preUpdate();
+            column.setDelFlag(GenTableColumn.DEL_FLAG_DELETE);
+            genTableColumnDao.update(column);
+        }
+    }
 	
 }
