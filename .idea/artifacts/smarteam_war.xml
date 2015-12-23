@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="smarteam:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="smarteam.war">
-      <element id="artifact" artifact-name="smarteam:war exploded" />
-    </root>
-  </artifact>
-</component>
