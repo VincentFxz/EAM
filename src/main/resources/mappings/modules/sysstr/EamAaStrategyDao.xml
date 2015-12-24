@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dc.smarteam.modules.sysmng.dao.EamSystemDao">
+<mapper namespace="com.dc.smarteam.modules.sysstr.dao.EamAaStrategyDao">
     
-	<sql id="eamSystemColumns">
+	<sql id="eamAaStrategyColumns">
 		a.id AS "id",
 		a.name AS "name",
 		a.chinese_name AS "chineseName",
-		a.eam_bank AS "eamBank",
-		a.eam_sysgroup_id AS "eamSysgroupId",
-		a.eam_aa_layer_id AS "eamAaLayerId",
-		a.eam_org_layer_id AS "eamOrgLayerId",
-		a.eam_build_type AS "eamBuildType",
-		a.eam_build_state AS "eamBuildState",
-		a.eam_trend AS "eamTrend",
+		a.strategy_process AS "strategyProcess",
+		a.conclusion AS "conclusion",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -21,22 +16,22 @@
 		a.del_flag AS "delFlag"
 	</sql>
 	
-	<sql id="eamSystemJoins">
+	<sql id="eamAaStrategyJoins">
 	</sql>
     
-	<select id="get" resultType="EamSystem">
+	<select id="get" resultType="EamAaStrategy">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamAaStrategyColumns"/>
+		FROM eam_aa_strategy a
+		<include refid="eamAaStrategyJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="EamSystem">
+	<select id="findList" resultType="EamAaStrategy">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamAaStrategyColumns"/>
+		FROM eam_aa_strategy a
+		<include refid="eamAaStrategyJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="name != null and name != ''">
@@ -46,10 +41,10 @@
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
 			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name = #{chineseName}
-			</if>
-			<if test="eamBuildState != null and eamBuildState != ''">
-				AND a.eam_build_state = #{eamBuildState}
+				AND a.chinese_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
 			</if>
 		</where>
 		<choose>
@@ -62,11 +57,11 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="EamSystem">
+	<select id="findAllList" resultType="EamAaStrategy">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamAaStrategyColumns"/>
+		FROM eam_aa_strategy a
+		<include refid="eamAaStrategyJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 		</where>		
@@ -81,17 +76,12 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO eam_system(
+		INSERT INTO eam_aa_strategy(
 			id,
 			name,
 			chinese_name,
-			eam_bank,
-			eam_sysgroup_id,
-			eam_aa_layer_id,
-			eam_org_layer_id,
-			eam_build_type,
-			eam_build_state,
-			eam_trend,
+			strategy_process,
+			conclusion,
 			create_by,
 			create_date,
 			update_by,
@@ -102,13 +92,8 @@
 			#{id},
 			#{name},
 			#{chineseName},
-			#{eamBank},
-			#{eamSysgroupId},
-			#{eamAaLayerId},
-			#{eamOrgLayerId},
-			#{eamBuildType},
-			#{eamBuildState},
-			#{eamTrend},
+			#{strategyProcess},
+			#{conclusion},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -119,16 +104,11 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE eam_system SET 	
+		UPDATE eam_aa_strategy SET 	
 			name = #{name},
 			chinese_name = #{chineseName},
-			eam_bank = #{eamBank},
-			eam_sysgroup_id = #{eamSysgroupId},
-			eam_aa_layer_id = #{eamAaLayerId},
-			eam_org_layer_id = #{eamOrgLayerId},
-			eam_build_type = #{eamBuildType},
-			eam_build_state = #{eamBuildState},
-			eam_trend = #{eamTrend},
+			strategy_process = #{strategyProcess},
+			conclusion = #{conclusion},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}
@@ -136,7 +116,7 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE eam_system SET 
+		UPDATE eam_aa_strategy SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>

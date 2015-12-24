@@ -6,6 +6,11 @@ package com.dc.smarteam.modules.sysmng.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dc.smarteam.modules.syslyr.entity.EamAaLayer;
+import com.dc.smarteam.modules.syslyr.service.EamAaLayerService;
+import com.dc.smarteam.modules.syssgrp.entity.EamSysgroup;
+import com.dc.smarteam.modules.syssgrp.service.EamSysgroupService;
+import com.dc.smarteam.modules.sysstr.service.EamAaStrategyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +30,7 @@ import com.dc.smarteam.modules.sysmng.service.EamSystemService;
 /**
  * 系统管理Controller
  * @author yangqjb
- * @version 2015-12-21
+ * @version 2015-12-24
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysmng/eamSystem")
@@ -33,7 +38,11 @@ public class EamSystemController extends BaseController {
 
 	@Autowired
 	private EamSystemService eamSystemService;
-	
+	@Autowired
+	private EamSysgroupService eamSysgroupService;
+	@Autowired
+	private EamAaLayerService eamAaLayerService;
+
 	@ModelAttribute
 	public EamSystem get(@RequestParam(required=false) String id) {
 		EamSystem entity = null;
@@ -51,6 +60,11 @@ public class EamSystemController extends BaseController {
 	public String list(EamSystem eamSystem, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamSystem> page = eamSystemService.findPage(new Page<EamSystem>(request, response), eamSystem); 
 		model.addAttribute("page", page);
+
+        model.addAttribute("sysGroupList",eamSysgroupService.findList(new EamSysgroup()));
+        model.addAttribute("sysAaLayerList",eamAaLayerService.findList(new EamAaLayer()));
+        //机构层次？
+//        model.addAttribute("sysOrgLayerList",eamSysgroupService.findList(new EamSysgroup()));
 		return "modules/sysmng/eamSystemList";
 	}
 
@@ -58,6 +72,9 @@ public class EamSystemController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(EamSystem eamSystem, Model model) {
 		model.addAttribute("eamSystem", eamSystem);
+
+        model.addAttribute("sysGroupList",eamSysgroupService.findList(new EamSysgroup()));
+        model.addAttribute("sysAaLayerList",eamAaLayerService.findList(new EamAaLayer()));
 		return "modules/sysmng/eamSystemForm";
 	}
 

@@ -36,67 +36,82 @@
 		<div class="control-group">
 			<label class="control-label">系统名称：</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="255" class="input-xlarge "/>
+				<form:input path="name" htmlEscape="false" maxlength="250" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">中文名称：</label>
 			<div class="controls">
-				<form:input path="chineseName" htmlEscape="false" maxlength="382.5" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">描述：</label>
-			<div class="controls">
-				<form:textarea path="comments" htmlEscape="false" rows="4" maxlength="2047" class="input-xxlarge "/>
+				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属银行：</label>
 			<div class="controls">
-				<form:input path="eamBankId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamBank" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_bank')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属系统群组：</label>
 			<div class="controls">
-				<form:input path="eamSysgroupId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamSysgroupId" class="input-xlarge ">
+					<form:option value="" label=""/>
+                    <form:options items="${sysGroupList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属应用架构层次：</label>
 			<div class="controls">
-				<form:input path="eamAaLayerId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamAaLayerId" class="input-xlarge ">
+					<form:option value="" label=""/>
+                    <form:options items="${sysAaLayerList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">机构层次代码：</label>
 			<div class="controls">
-				<form:input path="eamOrgLayerId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamOrgLayerId" class="input-xlarge ">
+					<form:option value="" label=""/>
+                    <form:options items="${sysOrgLayerList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">建设类型代码：</label>
+			<label class="control-label">建设类型：</label>
 			<div class="controls">
-				<form:input path="eamBuildTypeId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamBuildType" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_sys_build_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">建设状态代码：</label>
+			<label class="control-label">建设状态：</label>
 			<div class="controls">
-				<form:input path="eamBuildStateId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamBuildState" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_sys_build_state')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">未来走向：</label>
 			<div class="controls">
-				<form:input path="eamTrendId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
+				<form:select path="eamTrend" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_sys_trend')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">备注：</label>
+			<label class="control-label">备注信息：</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="382.5" class="input-xxlarge "/>
+				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="375" class="input-xxlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

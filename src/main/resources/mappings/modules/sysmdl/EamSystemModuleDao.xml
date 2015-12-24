@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dc.smarteam.modules.sysmng.dao.EamSystemDao">
+<mapper namespace="com.dc.smarteam.modules.sysmdl.dao.EamSystemModuleDao">
     
-	<sql id="eamSystemColumns">
+	<sql id="eamSystemModuleColumns">
 		a.id AS "id",
+		a.eam_system_id AS "eamSystemId",
 		a.name AS "name",
 		a.chinese_name AS "chineseName",
-		a.eam_bank AS "eamBank",
-		a.eam_sysgroup_id AS "eamSysgroupId",
-		a.eam_aa_layer_id AS "eamAaLayerId",
-		a.eam_org_layer_id AS "eamOrgLayerId",
-		a.eam_build_type AS "eamBuildType",
-		a.eam_build_state AS "eamBuildState",
-		a.eam_trend AS "eamTrend",
+		a.manager AS "manager.id",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -21,24 +16,28 @@
 		a.del_flag AS "delFlag"
 	</sql>
 	
-	<sql id="eamSystemJoins">
+	<sql id="eamSystemModuleJoins">
+		LEFT JOIN sys_user u5 ON u5.id = a.manager
 	</sql>
     
-	<select id="get" resultType="EamSystem">
+	<select id="get" resultType="EamSystemModule">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamSystemModuleColumns"/>
+		FROM eam_system_module a
+		<include refid="eamSystemModuleJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="EamSystem">
+	<select id="findList" resultType="EamSystemModule">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamSystemModuleColumns"/>
+		FROM eam_system_module a
+		<include refid="eamSystemModuleJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="eamSystemId != null and eamSystemId != ''">
+				AND a.eam_system_id = #{eamSystemId}
+			</if>
 			<if test="name != null and name != ''">
 				AND a.name LIKE 
 					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
@@ -46,10 +45,13 @@
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
 			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name = #{chineseName}
+				AND a.chinese_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
 			</if>
-			<if test="eamBuildState != null and eamBuildState != ''">
-				AND a.eam_build_state = #{eamBuildState}
+			<if test="manager != null and manager.id != null and manager.id != ''">
+				AND a.manager = #{manager.id}
 			</if>
 		</where>
 		<choose>
@@ -62,11 +64,11 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="EamSystem">
+	<select id="findAllList" resultType="EamSystemModule">
 		SELECT 
-			<include refid="eamSystemColumns"/>
-		FROM eam_system a
-		<include refid="eamSystemJoins"/>
+			<include refid="eamSystemModuleColumns"/>
+		FROM eam_system_module a
+		<include refid="eamSystemModuleJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 		</where>		
@@ -81,17 +83,12 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO eam_system(
+		INSERT INTO eam_system_module(
 			id,
+			eam_system_id,
 			name,
 			chinese_name,
-			eam_bank,
-			eam_sysgroup_id,
-			eam_aa_layer_id,
-			eam_org_layer_id,
-			eam_build_type,
-			eam_build_state,
-			eam_trend,
+			manager,
 			create_by,
 			create_date,
 			update_by,
@@ -100,15 +97,10 @@
 			del_flag
 		) VALUES (
 			#{id},
+			#{eamSystemId},
 			#{name},
 			#{chineseName},
-			#{eamBank},
-			#{eamSysgroupId},
-			#{eamAaLayerId},
-			#{eamOrgLayerId},
-			#{eamBuildType},
-			#{eamBuildState},
-			#{eamTrend},
+			#{manager.id},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -119,16 +111,13 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE eam_system SET 	
+		UPDATE eam_system_module SET 	
+			eam_system_id = #{eamSystemId},
 			name = #{name},
 			chinese_name = #{chineseName},
-			eam_bank = #{eamBank},
-			eam_sysgroup_id = #{eamSysgroupId},
-			eam_aa_layer_id = #{eamAaLayerId},
-			eam_org_layer_id = #{eamOrgLayerId},
-			eam_build_type = #{eamBuildType},
-			eam_build_state = #{eamBuildState},
-			eam_trend = #{eamTrend},
+			manager = #{manager.id},
+			create_by = #{createBy.id},
+			create_date = #{createDate},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}
@@ -136,7 +125,7 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE eam_system SET 
+		UPDATE eam_system_module SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>

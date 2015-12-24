@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.dc.smarteam.modules.strategy.service;
+package com.dc.smarteam.modules.sysstr.service;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dc.smarteam.common.persistence.Page;
 import com.dc.smarteam.common.service.CrudService;
-import com.dc.smarteam.modules.strategy.entity.EamAaStrategy;
-import com.dc.smarteam.modules.strategy.dao.EamAaStrategyDao;
+import com.dc.smarteam.modules.sysstr.entity.EamAaStrategy;
+import com.dc.smarteam.modules.sysstr.dao.EamAaStrategyDao;
 
 /**
- * 决策点管理Service
- * @author zhanghaor
- * @version 2015-12-23
+ * 应用系统决策管理Service
+ * @author yangqjb
+ * @version 2015-12-24
  */
 @Service
 @Transactional(readOnly = true)

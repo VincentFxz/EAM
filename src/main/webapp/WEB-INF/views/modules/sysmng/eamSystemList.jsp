@@ -26,10 +26,16 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
 			<li><label>系统名称：</label>
-				<form:input path="name" htmlEscape="false" maxlength="255" class="input-medium"/>
+				<form:input path="name" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
 			<li><label>中文名称：</label>
-				<form:input path="chineseName" htmlEscape="false" maxlength="382.5" class="input-medium"/>
+				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-medium"/>
+			</li>
+			<li><label>建设状态：</label>
+				<form:select path="eamBuildState" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_sys_build_state')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -40,10 +46,8 @@
 		<thead>
 			<tr>
 				<th>系统名称</th>
-				<th>中文名称</th>
-				<th>更新者</th>
 				<th>更新时间</th>
-				<th>备注</th>
+				<th>备注信息</th>
 				<shiro:hasPermission name="sysmng:eamSystem:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -53,12 +57,6 @@
 				<td><a href="${ctx}/sysmng/eamSystem/form?id=${eamSystem.id}">
 					${eamSystem.name}
 				</a></td>
-				<td>
-					${eamSystem.chineseName}
-				</td>
-				<td>
-					${eamSystem.updateBy.id}
-				</td>
 				<td>
 					<fmt:formatDate value="${eamSystem.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>

@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.dc.smarteam.modules.strategy.web;
+package com.dc.smarteam.modules.sysstr.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,16 +19,16 @@ import com.dc.smarteam.common.config.Global;
 import com.dc.smarteam.common.persistence.Page;
 import com.dc.smarteam.common.web.BaseController;
 import com.dc.smarteam.common.utils.StringUtils;
-import com.dc.smarteam.modules.strategy.entity.EamAaStrategy;
-import com.dc.smarteam.modules.strategy.service.EamAaStrategyService;
+import com.dc.smarteam.modules.sysstr.entity.EamAaStrategy;
+import com.dc.smarteam.modules.sysstr.service.EamAaStrategyService;
 
 /**
- * 决策点管理Controller
- * @author zhanghaor
- * @version 2015-12-23
+ * 应用系统决策管理Controller
+ * @author yangqjb
+ * @version 2015-12-24
  */
 @Controller
-@RequestMapping(value = "${adminPath}/strategy/eamAaStrategy")
+@RequestMapping(value = "${adminPath}/sysstr/eamAaStrategy")
 public class EamAaStrategyController extends BaseController {
 
 	@Autowired
@@ -46,38 +46,38 @@ public class EamAaStrategyController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("strategy:eamAaStrategy:view")
+	@RequiresPermissions("sysstr:eamAaStrategy:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(EamAaStrategy eamAaStrategy, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamAaStrategy> page = eamAaStrategyService.findPage(new Page<EamAaStrategy>(request, response), eamAaStrategy); 
 		model.addAttribute("page", page);
-		return "modules/strategy/eamAaStrategyList";
+		return "modules/sysstr/eamAaStrategyList";
 	}
 
-	@RequiresPermissions("strategy:eamAaStrategy:view")
+	@RequiresPermissions("sysstr:eamAaStrategy:view")
 	@RequestMapping(value = "form")
 	public String form(EamAaStrategy eamAaStrategy, Model model) {
 		model.addAttribute("eamAaStrategy", eamAaStrategy);
-		return "modules/strategy/eamAaStrategyForm";
+		return "modules/sysstr/eamAaStrategyForm";
 	}
 
-	@RequiresPermissions("strategy:eamAaStrategy:edit")
+	@RequiresPermissions("sysstr:eamAaStrategy:edit")
 	@RequestMapping(value = "save")
 	public String save(EamAaStrategy eamAaStrategy, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, eamAaStrategy)){
 			return form(eamAaStrategy, model);
 		}
 		eamAaStrategyService.save(eamAaStrategy);
-		addMessage(redirectAttributes, "保存决策点成功");
-		return "redirect:"+Global.getAdminPath()+"/strategy/eamAaStrategy/?repage";
+		addMessage(redirectAttributes, "保存系统决策成功");
+		return "redirect:"+Global.getAdminPath()+"/sysstr/eamAaStrategy/?repage";
 	}
 	
-	@RequiresPermissions("strategy:eamAaStrategy:edit")
+	@RequiresPermissions("sysstr:eamAaStrategy:edit")
 	@RequestMapping(value = "delete")
 	public String delete(EamAaStrategy eamAaStrategy, RedirectAttributes redirectAttributes) {
 		eamAaStrategyService.delete(eamAaStrategy);
-		addMessage(redirectAttributes, "删除决策点成功");
-		return "redirect:"+Global.getAdminPath()+"/strategy/eamAaStrategy/?repage";
+		addMessage(redirectAttributes, "删除系统决策成功");
+		return "redirect:"+Global.getAdminPath()+"/sysstr/eamAaStrategy/?repage";
 	}
 
 }

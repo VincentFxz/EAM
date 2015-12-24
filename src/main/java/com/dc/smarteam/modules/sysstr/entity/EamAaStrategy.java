@@ -1,16 +1,16 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.dc.smarteam.modules.strategy.entity;
+package com.dc.smarteam.modules.sysstr.entity;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 决策点管理Entity
- * @author zhanghaor
- * @version 2015-12-23
+ * 应用系统决策管理Entity
+ * @author yangqjb
+ * @version 2015-12-24
  */
 public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 	
@@ -19,7 +19,6 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 	private String chineseName;		// 决策点中文名
 	private String strategyProcess;		// 决策过程
 	private String conclusion;		// 结论
-	private String comments;		// 描述
 	
 	public EamAaStrategy() {
 		super();
@@ -29,7 +28,7 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		super(id);
 	}
 
-	@Length(min=1, max=255, message="决策点名称长度必须介于 1 和 255 之间")
+	@Length(min=1, max=250, message="决策点名称长度必须介于 1 和 250 之间")
 	public String getName() {
 		return name;
 	}
@@ -38,7 +37,7 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=255, message="决策点中文名长度必须介于 0 和 255 之间")
+	@Length(min=0, max=375, message="决策点中文名长度必须介于 0 和 375 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -47,7 +46,7 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.chineseName = chineseName;
 	}
 	
-	@Length(min=0, max=2047, message="决策过程长度必须介于 0 和 2047 之间")
+	@Length(min=0, max=2000, message="决策过程长度必须介于 0 和 2000 之间")
 	public String getStrategyProcess() {
 		return strategyProcess;
 	}
@@ -56,22 +55,13 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.strategyProcess = strategyProcess;
 	}
 	
-	@Length(min=0, max=2047, message="结论长度必须介于 0 和 2047 之间")
+	@Length(min=0, max=2000, message="结论长度必须介于 0 和 2000 之间")
 	public String getConclusion() {
 		return conclusion;
 	}
 
 	public void setConclusion(String conclusion) {
 		this.conclusion = conclusion;
-	}
-	
-	@Length(min=0, max=2047, message="描述长度必须介于 0 和 2047 之间")
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
 	}
 	
 }
