@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.smarteam.modules.log.dao.EamLogTypeDao">
+    
+	<sql id="eamLogTypeColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.chinese_name AS "chineseName",
+		a.log_range AS "logRange",
+		a.log_clean_type AS "logCleanType",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy.id",
+		a.remarks AS "remarks",
+		a.del_flg AS "delFlg"
+	</sql>
+	
+	<sql id="eamLogTypeJoins">
+	</sql>
+    
+	<select id="get" resultType="EamLogType">
+		SELECT 
+			<include refid="eamLogTypeColumns"/>
+		FROM eam_log_type a
+		<include refid="eamLogTypeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="EamLogType">
+		SELECT 
+			<include refid="eamLogTypeColumns"/>
+		FROM eam_log_type a
+		<include refid="eamLogTypeJoins"/>
+		<where>
+			
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EamLogType">
+		SELECT 
+			<include refid="eamLogTypeColumns"/>
+		FROM eam_log_type a
+		<include refid="eamLogTypeJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO eam_log_type(
+			id,
+			name,
+			chinese_name,
+			log_range,
+			log_clean_type,
+			update_by,
+			update_date,
+			create_date,
+			create_by,
+			remarks,
+			del_flg
+		) VALUES (
+			#{id},
+			#{name},
+			#{chineseName},
+			#{logRange},
+			#{logCleanType},
+			#{updateBy.id},
+			#{updateDate},
+			#{createDate},
+			#{createBy.id},
+			#{remarks},
+			#{delFlg}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE eam_log_type SET 	
+			name = #{name},
+			chinese_name = #{chineseName},
+			log_range = #{logRange},
+			log_clean_type = #{logCleanType},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			del_flg = #{delFlg}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM eam_log_type
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
