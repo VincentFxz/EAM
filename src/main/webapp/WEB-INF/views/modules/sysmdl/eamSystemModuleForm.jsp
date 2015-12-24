@@ -58,9 +58,8 @@
 		<div class="control-group">
 			<label class="control-label">模块负责人：</label>
 			<div class="controls">
-                <sys:treeselect id="manager" name="manager.id" value="${eamSystemModule.manager.id}" labelName="manager.name" labelValue="${eamSystemModule.manager.name}"
-                                title="用户" url="/sys/office/treeData?type=3" cssClass="required"
-                                allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
+                <sys:treeselect id="manager" name="manager" value="${eamSystemModule.manager.id}" labelName="eamSystemModule.manager.name" labelValue="${eamSystemModule.manager.name}"
+                                title="用户" url="/sys/office/treeData?type=3" allowClear="true" notAllowSelectParent="true"/>
             </div>
 		</div>
 		<div class="control-group">

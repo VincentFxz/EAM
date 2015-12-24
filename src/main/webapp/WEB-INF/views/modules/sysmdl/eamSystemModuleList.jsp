@@ -38,9 +38,8 @@
 				<form:input path="chineseName" htmlEscape="false" maxlength="382.5" class="input-medium"/>
 			</li>
 			<li><label>模块负责人：</label>
-                <sys:treeselect id="manager" name="user.id" value="${user.user.id}" labelName="user.name"
-                                labelValue="${user.office.name}" title="用户" url="/sys/office/treeData?type=3"
-                                cssClass="required" allowClear="true" notAllowSelectParent="true"/>
+                <sys:treeselect id="manager" name="manager" value="${eamSystemModule.manager.id}" labelName="eamSystemModule.manager.name" labelValue="${eamSystemModule.manager.name}"
+                                title="用户" url="/sys/office/treeData?type=3" allowClear="true" notAllowSelectParent="true"/>
             </li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -68,7 +67,7 @@
 					${eamSystemModule.chineseName}
 				</td>
 				<td>
-					${user.name}
+                    ${eamSystemModule.manager.name}
 				</td>
 				<td>
 					<fmt:formatDate value="${eamSystemModule.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
