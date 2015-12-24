@@ -10,7 +10,7 @@ import com.dc.smarteam.common.persistence.DataEntity;
 /**
  * 决策点管理Entity
  * @author zhanghaor
- * @version 2015-12-23
+ * @version 2015-12-24
  */
 public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 	
@@ -19,7 +19,6 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 	private String chineseName;		// 决策点中文名
 	private String strategyProcess;		// 决策过程
 	private String conclusion;		// 结论
-	private String comments;		// 描述
 	
 	public EamAaStrategy() {
 		super();
@@ -63,15 +62,6 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 
 	public void setConclusion(String conclusion) {
 		this.conclusion = conclusion;
-	}
-	
-	@Length(min=0, max=2047, message="描述长度必须介于 0 和 2047 之间")
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
 	}
 	
 }

@@ -16,7 +16,7 @@ import com.dc.smarteam.modules.strategy.dao.EamAaStrategyDao;
 /**
  * 决策点管理Service
  * @author zhanghaor
- * @version 2015-12-23
+ * @version 2015-12-24
  */
 @Service
 @Transactional(readOnly = true)

@@ -37,9 +37,9 @@
 		<thead>
 			<tr>
 				<th>决策点名称</th>
-				<th>描述</th>
-				<th>创建者</th>
-				<th>创建时间</th>
+				<th>决策点中文名</th>
+				<th>决策过程</th>
+				<th>结论</th>
 				<th>更新者</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
@@ -53,13 +53,13 @@
 					${eamAaStrategy.name}
 				</a></td>
 				<td>
-					${eamAaStrategy.comments}
+					${eamAaStrategy.chineseName}
 				</td>
 				<td>
-					${eamAaStrategy.createBy.id}
+					${eamAaStrategy.strategyProcess}
 				</td>
 				<td>
-					<fmt:formatDate value="${eamAaStrategy.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					${eamAaStrategy.conclusion}
 				</td>
 				<td>
 					${eamAaStrategy.updateBy.id}

@@ -25,7 +25,7 @@ import com.dc.smarteam.modules.strategy.service.EamAaStrategyService;
 /**
  * 决策点管理Controller
  * @author zhanghaor
- * @version 2015-12-23
+ * @version 2015-12-24
  */
 @Controller
 @RequestMapping(value = "${adminPath}/strategy/eamAaStrategy")
