@@ -34,14 +34,14 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">决策点名称：</label>
+			<label class="control-label">名称：</label>
 			<div class="controls">
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">决策点中文名：</label>
+			<label class="control-label">中文名：</label>
 			<div class="controls">
 				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-xlarge "/>
 			</div>
@@ -55,11 +55,7 @@
 		<div class="control-group">
 			<label class="control-label">结论：</label>
 			<div class="controls">
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/modules/sysstr/eamAaStrategyForm.jsp
 				<form:input path="conclusion" htmlEscape="false" maxlength="2000" class="input-xlarge "/>
-=======
-				<form:input path="conclusion" htmlEscape="false" maxlength="2047" class="input-xlarge "/>
->>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/webapp/WEB-INF/views/modules/strategy/eamAaStrategyForm.jsp
 			</div>
 		</div>
 		<div class="control-group">
