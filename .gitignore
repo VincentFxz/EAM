@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 target/
 
 
@@ -21,3 +22,9 @@ src/main/resources/jeesite.properties
 src/main/resources/log4j.properties
 
 src/main/resources/smarteam.properties
+=======
+
+target/
+
+target/maven-archiver/pom.properties
+>>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa

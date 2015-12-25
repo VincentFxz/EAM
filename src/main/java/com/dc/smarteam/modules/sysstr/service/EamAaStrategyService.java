@@ -14,8 +14,13 @@ import com.dc.smarteam.modules.sysstr.entity.EamAaStrategy;
 import com.dc.smarteam.modules.sysstr.dao.EamAaStrategyDao;
 
 /**
+<<<<<<< HEAD:src/main/java/com/dc/smarteam/modules/sysstr/service/EamAaStrategyService.java
  * 应用系统决策管理Service
  * @author yangqjb
+=======
+ * 决策点管理Service
+ * @author zhanghaor
+>>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/java/com/dc/smarteam/modules/strategy/service/EamAaStrategyService.java
  * @version 2015-12-24
  */
 @Service

@@ -55,7 +55,11 @@
 		<div class="control-group">
 			<label class="control-label">结论：</label>
 			<div class="controls">
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/modules/sysstr/eamAaStrategyForm.jsp
 				<form:input path="conclusion" htmlEscape="false" maxlength="2000" class="input-xlarge "/>
+=======
+				<form:input path="conclusion" htmlEscape="false" maxlength="2047" class="input-xlarge "/>
+>>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/webapp/WEB-INF/views/modules/strategy/eamAaStrategyForm.jsp
 			</div>
 		</div>
 		<div class="control-group">

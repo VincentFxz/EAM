@@ -8,8 +8,13 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
+<<<<<<< HEAD:src/main/java/com/dc/smarteam/modules/sysstr/entity/EamAaStrategy.java
  * 应用系统决策管理Entity
  * @author yangqjb
+=======
+ * 决策点管理Entity
+ * @author zhanghaor
+>>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/java/com/dc/smarteam/modules/strategy/entity/EamAaStrategy.java
  * @version 2015-12-24
  */
 public class EamAaStrategy extends DataEntity<EamAaStrategy> {
