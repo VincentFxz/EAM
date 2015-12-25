@@ -61,7 +61,7 @@ update_by varchar2(64) NOT NULL,
 update_date timestamp NOT NULL,
 remarks nvarchar2(250),
 del_flag char(1) DEFAULT '0' NOT NULL,
-PRIMARY KEY (id),
+PRIMARY KEY (id)
 );
 
 COMMENT ON TABLE eam_system_module IS '系统模块管理';
