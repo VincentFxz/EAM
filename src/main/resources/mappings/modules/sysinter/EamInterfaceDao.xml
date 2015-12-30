@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.smarteam.modules.sysinter.dao.EamInterfaceDao">
+    
+	<sql id="eamInterfaceColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.chinese_name AS "chineseName",
+		a.eam_linknode_id AS "eamLinknodeId",
+		a.req_msg_format AS "reqMsgFormat",
+		a.rsp_msg_format AS "rspMsgFormat",
+		a.start_date AS "startDate",
+		a.account_trade AS "accountTrade",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="eamInterfaceJoins">
+	</sql>
+    
+	<select id="get" resultType="EamInterface">
+		SELECT 
+			<include refid="eamInterfaceColumns"/>
+		FROM eam_interface a
+		<include refid="eamInterfaceJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="EamInterface">
+		SELECT 
+			<include refid="eamInterfaceColumns"/>
+		FROM eam_interface a
+		<include refid="eamInterfaceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EamInterface">
+		SELECT 
+			<include refid="eamInterfaceColumns"/>
+		FROM eam_interface a
+		<include refid="eamInterfaceJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO eam_interface(
+			id,
+			name,
+			chinese_name,
+			eam_linknode_id,
+			req_msg_format,
+			rsp_msg_format,
+			start_date,
+			account_trade,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{chineseName},
+			#{eamLinknodeId},
+			#{reqMsgFormat},
+			#{rspMsgFormat},
+			#{startDate},
+			#{accountTrade},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE eam_interface SET 	
+			name = #{name},
+			chinese_name = #{chineseName},
+			eam_linknode_id = #{eamLinknodeId},
+			req_msg_format = #{reqMsgFormat},
+			rsp_msg_format = #{rspMsgFormat},
+			start_date = #{startDate},
+			account_trade = #{accountTrade},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE eam_interface SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
