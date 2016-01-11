@@ -6,6 +6,7 @@ package com.dc.smarteam.modules.sysnode.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dc.smarteam.modules.syslink.entity.EamSyslink;
 import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import com.dc.smarteam.modules.sysmng.service.EamSystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -23,6 +24,8 @@ import com.dc.smarteam.common.web.BaseController;
 import com.dc.smarteam.common.utils.StringUtils;
 import com.dc.smarteam.modules.sysnode.entity.EamLinknode;
 import com.dc.smarteam.modules.sysnode.service.EamLinknodeService;
+
+import java.util.List;
 
 /**
  * 系统关联节点Controller
@@ -53,6 +56,12 @@ public class EamLinknodeController extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(EamLinknode eamLinknode, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamLinknode> page = eamLinknodeService.findPage(new Page<EamLinknode>(request, response), eamLinknode);
+
+        List<EamLinknode> lst = page.getList();
+        for(int i=0;i<lst.size();i++){
+            lst.get(i).setEamSystem(eamSystemService.get(lst.get(i).getEamSystemId()));
+        }
+        page.setList(lst);
         model.addAttribute("page", page);
 
         model.addAttribute("systems", eamSystemService.findList(new EamSystem()));

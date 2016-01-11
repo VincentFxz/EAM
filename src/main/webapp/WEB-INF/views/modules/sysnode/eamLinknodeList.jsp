@@ -31,7 +31,7 @@
 			<li><label>中文名称：</label>
 				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-medium"/>
 			</li>
-			<li><label>节点系统ID：</label>
+			<li><label>所属系统：</label>
 				<form:select path="eamSystemId" class="input-medium">
 					<form:option value="" label=""/>
 					<form:options items="${systems}" itemLabel="name" itemValue="id" htmlEscape="false"/>
@@ -53,7 +53,7 @@
 			<tr>
 				<th>名称</th>
 				<th>中文名称</th>
-				<th>节点系统ID</th>
+				<th>所属系统</th>
 				<th>节点类型</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
@@ -70,7 +70,7 @@
 					${eamLinknode.chineseName}
 				</td>
 				<td>
-					${fns:getDictLabel(eamLinknode.eamSystemId, '', '')}
+                    <a href="javascript:" onclick="$('#eamSystemId').val('${eamLinknode.eamSystem.id}');$('#searchForm').submit();return false;">${eamLinknode.eamSystem.name}</a>
 				</td>
 				<td>
 					${fns:getDictLabel(eamLinknode.linknodeType, 'linknode_type', '')}
