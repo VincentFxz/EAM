@@ -3,6 +3,7 @@
  */
 package com.dc.smarteam.modules.sysnode.entity;
 
+import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import org.hibernate.validator.constraints.Length;
 
 import com.dc.smarteam.common.persistence.DataEntity;
@@ -18,7 +19,17 @@ public class EamLinknode extends DataEntity<EamLinknode> {
 	private String name;		// 名称
 	private String chineseName;		// 中文名称
 	private String eamSystemId;		// 节点系统ID
-	private String linknodeType;		// 节点类型
+    private String linknodeType;		// 节点类型
+
+    public EamSystem getEamSystem() {
+        return eamSystem;
+    }
+
+    public void setEamSystem(EamSystem eamSystem) {
+        this.eamSystem = eamSystem;
+    }
+
+    private EamSystem eamSystem;		// 所属系统
 	
 	public EamLinknode() {
 		super();
