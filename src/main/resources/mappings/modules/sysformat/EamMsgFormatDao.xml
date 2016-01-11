@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.smarteam.modules.sysformat.dao.EamMsgFormatDao">
+    
+	<sql id="eamMsgFormatColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.chinese_name AS "chineseName",
+		a.format AS "format",
+		a.msg_head AS "msgHead",
+		a.msg_body AS "msgBody",
+		a.max_length AS "maxLength",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="eamMsgFormatJoins">
+	</sql>
+    
+	<select id="get" resultType="EamMsgFormat">
+		SELECT 
+			<include refid="eamMsgFormatColumns"/>
+		FROM eam_msg_format a
+		<include refid="eamMsgFormatJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="EamMsgFormat">
+		SELECT 
+			<include refid="eamMsgFormatColumns"/>
+		FROM eam_msg_format a
+		<include refid="eamMsgFormatJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EamMsgFormat">
+		SELECT 
+			<include refid="eamMsgFormatColumns"/>
+		FROM eam_msg_format a
+		<include refid="eamMsgFormatJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO eam_msg_format(
+			id,
+			name,
+			chinese_name,
+			format,
+			msg_head,
+			msg_body,
+			max_length,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{chineseName},
+			#{format},
+			#{msgHead},
+			#{msgBody},
+			#{maxLength},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE eam_msg_format SET 	
+			name = #{name},
+			chinese_name = #{chineseName},
+			format = #{format},
+			msg_head = #{msgHead},
+			msg_body = #{msgBody},
+			max_length = #{maxLength},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE eam_msg_format SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
