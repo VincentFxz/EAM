@@ -3,6 +3,7 @@
  */
 package com.dc.smarteam.modules.sys.web;
 
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,29 @@ public class DictController extends BaseController {
 		model.addAttribute("dict", dict);
 		return "modules/sys/dictForm";
 	}
+    /**弹出窗口新增字典 add by yangqjb start*/
+    @RequiresPermissions("sys:dict:view")
+    @RequestMapping(value = "form/dlg")
+    public String form_dlg(Dict dict, Model model) {
+        model.addAttribute("dict", dict);
+        return "modules/sys/dictFormDlg";
+    }
+    @RequiresPermissions("sys:dict:edit")
+    @RequestMapping(value = "save/dlg")//@Valid
+    public String save_dlg(Dict dict, Model model, RedirectAttributes redirectAttributes) {
+        if(Global.isDemoMode()){
+            addMessage(redirectAttributes, "演示模式，不允许操作！");
+            return "redirect:" + adminPath + "/sys/dict/?repage&type="+dict.getType();
+        }
+        if (!beanValidator(model, dict)){
+            return form(dict, model);
+        }
+        dictService.save(dict);
+        addMessage(redirectAttributes, "添加字典'" + dict.getLabel() + "'成功");
+        return "redirect:" + adminPath + "/sys/dict/form/dlg?description="+ URLEncoder.encode(dict.getDescription())+"&type="+dict.getType()+"&sort="+(dict.getSort().intValue()+30);
+    }
+    /**弹出窗口新增字典 add by yangqjb end*/
+
 
 	@RequiresPermissions("sys:dict:edit")
 	@RequestMapping(value = "save")//@Valid 
