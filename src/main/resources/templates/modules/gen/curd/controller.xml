@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -56,6 +57,26 @@ public class ${ClassName}Controller extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(${ClassName} ${className}, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<${ClassName}> page = ${className}Service.findPage(new Page<${ClassName}>(request, response), ${className}); 
+		model.addAttribute("page", page);
+		return "${lastPackageName}/${viewPrefix}List";
+	}
+
+	@RequiresPermissions("${permissionPrefix}:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	<#list table.columnList as c>
+	<#if c.showType == "select"><#-- 为下拉选项设置查询参数 -->
+	@RequestParam(value = "${c.simpleJavaField}", required = false) String ${c.simpleJavaField},
+	</#if>
+	</#list>
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    ${ClassName} ${className} = new ${ClassName}();
+        <#list table.columnList as c>
+        <#if c.showType == "select">
+        ${className}.set${c.simpleJavaField?cap_first}(${c.simpleJavaField});
+        </#if>
+        </#list>
+		Page<${ClassName}> page = ${className}Service.findPage(new Page<${ClassName}>(request, response), ${className});
 		model.addAttribute("page", page);
 		return "${lastPackageName}/${viewPrefix}List";
 	}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
-	<name>viewForm</name>
-	<filePath>src/main/webapp/WEB-INF/views/${lastPackageName}/${moduleName}/${subModuleName}</filePath>
-	<fileName>${className}Form.jsp</fileName>
-	<content><![CDATA[
+    <name>viewForm</name>
+    <filePath>src/main/webapp/WEB-INF/views/${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+    <fileName>${className}Form.jsp</fileName>
+    <content><![CDATA[
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
@@ -36,6 +36,7 @@
 		<li><a href="${r"${ctx}"}/${urlPrefix}/">${functionNameSimple}列表</a></li>
 		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}">${functionNameSimple}<shiro:hasPermission name="${permissionPrefix}:edit">${r"${not empty "+className+".id?'修改':'添加'}"}</shiro:hasPermission><shiro:lacksPermission name="${permissionPrefix}:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
+	<div style="position:absolute;left:0px;width:80%">
 	<form:form id="inputForm" modelAttribute="${className}" action="${r"${ctx}"}/${urlPrefix}/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${r"${message}"}"/>		
@@ -49,10 +50,19 @@
 			<#elseif c.showType == "textarea">
 				<form:textarea path="${c.javaFieldId}" htmlEscape="false" rows="4"<#if c.dataLength != "0"> maxlength="${c.dataLength}"</#if> class="input-xxlarge <#if c.isNull != "1">required</#if>"/>
 			<#elseif c.showType == "select">
+			<#if c.dictType !="">
 				<form:select path="${c.javaFieldId}" class="input-xlarge <#if c.isNull != "1">required</#if>">
 					<form:option value="" label=""/>
 					<form:options items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<sys:dict description="${c.comments}" type="${c.dictType}" sort="${"$"}{(fns:getDictList('${c.dictType}').size()+1)*30}"/>
+			<#else>
+				<form:select path="${c.javaFieldId}" class="input-xlarge <#if c.isNull != "1">required</#if>">
+					<form:option value="" label=""/>
+					<form:options items="${"$"}{${c.javaFieldId}List}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+			</#if>
+
 			<#elseif c.showType == "checkbox">
 				<form:checkboxes path="${c.javaFieldId}" items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false" class="<#if c.isNull != "1">required</#if>"/>
 			<#elseif c.showType == "radiobox">
@@ -86,7 +96,15 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	    </div>
+    <div style="position:absolute;left:80%">
+        <ul class="nav">
+            <!-- 请将 param 替换为具体参数 -->
+            <li><a href="${r"${ctx}"}/sysnode/eamLinknode/param?param=${r"${param}"}">${r"${not empty "+className+".id?'相关实体':''}"}</a></li><br>
+            <li><a href="${r"${ctx}"}/sysnode/eamLinknode/param?param=${r"${param}"}&param1=param1">${r"${not empty "+className+".id?'相关实体':''}"}</a></li><br>
+        </ul>
+    </div>
 </body>
 </html>]]>
-	</content>
+    </content>
 </template>
