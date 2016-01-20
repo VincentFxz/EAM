@@ -37,10 +37,18 @@
 			<#if c.showType == "input" || c.showType == "textarea">
 				<form:input path="${c.javaFieldId}" htmlEscape="false"<#if c.dataLength != "0"> maxlength="${c.dataLength}"</#if> class="input-medium"/>
 			<#elseif c.showType == "select">
+			<#if c.dictType !="">
 				<form:select path="${c.javaFieldId}" class="input-medium">
 					<form:option value="" label=""/>
 					<form:options items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+			<#else>
+				<form:select path="${c.javaFieldId}" class="input-xlarge <#if c.isNull != "1">required</#if>">
+					<form:option value="" label=""/>
+					<form:options items="${"$"}{${c.javaFieldId}List}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+			</#if>
+
 			<#elseif c.showType == "checkbox">
 				<form:checkboxes path="${c.javaFieldId}" items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			<#elseif c.showType == "radiobox">
