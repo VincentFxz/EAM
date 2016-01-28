@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.sysformat.entity.EamMsgFormat;
 import com.dc.smarteam.modules.sysformat.service.EamMsgFormatService;
 
 /**
- * 报文格式Controller
+ * 报文格式管理Controller
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysformat/eamMsgFormat")
@@ -55,6 +56,18 @@ public class EamMsgFormatController extends BaseController {
 	}
 
 	@RequiresPermissions("sysformat:eamMsgFormat:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "format", required = false) String format,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamMsgFormat eamMsgFormat = new EamMsgFormat();
+        eamMsgFormat.setFormat(format);
+		Page<EamMsgFormat> page = eamMsgFormatService.findPage(new Page<EamMsgFormat>(request, response), eamMsgFormat);
+		model.addAttribute("page", page);
+		return "modules/sysformat/eamMsgFormatList";
+	}
+
+	@RequiresPermissions("sysformat:eamMsgFormat:view")
 	@RequestMapping(value = "form")
 	public String form(EamMsgFormat eamMsgFormat, Model model) {
 		model.addAttribute("eamMsgFormat", eamMsgFormat);
@@ -68,7 +81,7 @@ public class EamMsgFormatController extends BaseController {
 			return form(eamMsgFormat, model);
 		}
 		eamMsgFormatService.save(eamMsgFormat);
-		addMessage(redirectAttributes, "保存报文格式管理成功");
+		addMessage(redirectAttributes, "保存报文格式成功");
 		return "redirect:"+Global.getAdminPath()+"/sysformat/eamMsgFormat/?repage";
 	}
 	
@@ -76,7 +89,7 @@ public class EamMsgFormatController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamMsgFormat eamMsgFormat, RedirectAttributes redirectAttributes) {
 		eamMsgFormatService.delete(eamMsgFormat);
-		addMessage(redirectAttributes, "删除报文格式管理成功");
+		addMessage(redirectAttributes, "删除报文格式成功");
 		return "redirect:"+Global.getAdminPath()+"/sysformat/eamMsgFormat/?repage";
 	}
 

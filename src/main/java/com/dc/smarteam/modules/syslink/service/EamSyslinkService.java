@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.syslink.entity.EamSyslink;
 import com.dc.smarteam.modules.syslink.dao.EamSyslinkDao;
 
 /**
- * 系统关联关系Service
- * @author yangqjb
- * @version 2015-12-28
+ * 节点关联管理Service
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Service
 @Transactional(readOnly = true)

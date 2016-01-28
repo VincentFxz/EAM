@@ -38,12 +38,6 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
-			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
-			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

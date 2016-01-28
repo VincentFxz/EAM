@@ -30,11 +30,12 @@
 		<li><a href="${ctx}/sysnode/eamLinknode/">系统节点列表</a></li>
 		<li class="active"><a href="${ctx}/sysnode/eamLinknode/form?id=${eamLinknode.id}">系统节点<shiro:hasPermission name="sysnode:eamLinknode:edit">${not empty eamLinknode.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sysnode:eamLinknode:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
+	<div style="position:absolute;left:0px;width:80%">
 	<form:form id="inputForm" modelAttribute="eamLinknode" action="${ctx}/sysnode/eamLinknode/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">名称：</label>
+			<label class="control-label">节点名称：</label>
 			<div class="controls">
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
@@ -43,16 +44,18 @@
 		<div class="control-group">
 			<label class="control-label">中文名称：</label>
 			<div class="controls">
-				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-xlarge "/>
+				<form:input path="chineseName" htmlEscape="false" maxlength="250" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">节点系统ID：</label>
+			<label class="control-label">节点系统：</label>
 			<div class="controls">
-				<form:select path="eamSystemId" class="input-xlarge ">
+				<form:select path="eamSystemId" class="input-xlarge required">
 					<form:option value="" label=""/>
-					<form:options items="${systems}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					<form:options items="${eamSystemIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
+
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -62,6 +65,19 @@
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('linknode_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<sys:dict description="节点类型" type="linknode_type" sort="${(fns:getDictList('linknode_type').size()+1)*30}"/>
+
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">通讯协议：</label>
+			<div class="controls">
+				<form:select path="eamProtocolId" class="input-xlarge required">
+					<form:option value="" label=""/>
+					<form:options items="${eamProtocolIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -75,5 +91,13 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	    </div>
+    <div style="position:absolute;left:80%">
+        <ul class="nav">
+            <!-- 请将 param 替换为具体参数 -->
+			<li><a href="${ctx}/sysmng/eamSystem/list?id=${eamLinknode.eamSystemId}">${not empty eamLinknode.eamSystemId?'节点系统':''}</a></li><br>
+			<li><a href="${ctx}/protocol/eamProtocol/list?id=${eamLinknode.eamProtocolId}">${not empty eamLinknode.eamProtocolId?'通讯协议':''}</a></li><br>
+        </ul>
+    </div>
 </body>
 </html>

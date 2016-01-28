@@ -8,6 +8,7 @@
 		a.chinese_name AS "chineseName",
 		a.eam_system_id AS "eamSystemId",
 		a.linknode_type AS "linknodeType",
+		a.eam_protocol_id AS "eamProtocolId",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -40,17 +41,14 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
-			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
-			</if>
 			<if test="eamSystemId != null and eamSystemId != ''">
 				AND a.eam_system_id = #{eamSystemId}
 			</if>
 			<if test="linknodeType != null and linknodeType != ''">
 				AND a.linknode_type = #{linknodeType}
+			</if>
+			<if test="eamProtocolId != null and eamProtocolId != ''">
+				AND a.eam_protocol_id = #{eamProtocolId}
 			</if>
 		</where>
 		<choose>
@@ -88,6 +86,7 @@
 			chinese_name,
 			eam_system_id,
 			linknode_type,
+			eam_protocol_id,
 			create_by,
 			create_date,
 			update_by,
@@ -100,6 +99,7 @@
 			#{chineseName},
 			#{eamSystemId},
 			#{linknodeType},
+			#{eamProtocolId},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -115,6 +115,7 @@
 			chinese_name = #{chineseName},
 			eam_system_id = #{eamSystemId},
 			linknode_type = #{linknodeType},
+			eam_protocol_id = #{eamProtocolId},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}

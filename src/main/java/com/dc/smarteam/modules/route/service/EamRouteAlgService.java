@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.route.entity.EamRouteAlg;
 import com.dc.smarteam.modules.route.dao.EamRouteAlgDao;
 
 /**
- * 交易路由Service
- * @author kern
- * @version 2015-12-24
+ * 路由管理Service
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

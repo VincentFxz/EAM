@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.protocol.entity.EamProtocol;
 import com.dc.smarteam.modules.protocol.service.EamProtocolService;
 
 /**
- * 通讯协议管理Controller
- * @author kern
- * @version 2015-12-24
+ * 协议管理Controller
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Controller
 @RequestMapping(value = "${adminPath}/protocol/eamProtocol")
@@ -55,6 +56,18 @@ public class EamProtocolController extends BaseController {
 	}
 
 	@RequiresPermissions("protocol:eamProtocol:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "linkType", required = false) String linkType,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamProtocol eamProtocol = new EamProtocol();
+        eamProtocol.setLinkType(linkType);
+		Page<EamProtocol> page = eamProtocolService.findPage(new Page<EamProtocol>(request, response), eamProtocol);
+		model.addAttribute("page", page);
+		return "modules/protocol/eamProtocolList";
+	}
+
+	@RequiresPermissions("protocol:eamProtocol:view")
 	@RequestMapping(value = "form")
 	public String form(EamProtocol eamProtocol, Model model) {
 		model.addAttribute("eamProtocol", eamProtocol);
@@ -68,7 +81,7 @@ public class EamProtocolController extends BaseController {
 			return form(eamProtocol, model);
 		}
 		eamProtocolService.save(eamProtocol);
-		addMessage(redirectAttributes, "保存协议管理成功");
+		addMessage(redirectAttributes, "保存协议成功");
 		return "redirect:"+Global.getAdminPath()+"/protocol/eamProtocol/?repage";
 	}
 	
@@ -76,7 +89,7 @@ public class EamProtocolController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamProtocol eamProtocol, RedirectAttributes redirectAttributes) {
 		eamProtocolService.delete(eamProtocol);
-		addMessage(redirectAttributes, "删除协议管理成功");
+		addMessage(redirectAttributes, "删除协议成功");
 		return "redirect:"+Global.getAdminPath()+"/protocol/eamProtocol/?repage";
 	}
 

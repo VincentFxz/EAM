@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 系统架构层次管理Entity
- * @author yangqjb
- * @version 2015-12-24
+ * 架构层次管理Entity
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 public class EamAaLayer extends DataEntity<EamAaLayer> {
 	

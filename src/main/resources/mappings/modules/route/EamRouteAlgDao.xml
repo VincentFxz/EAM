@@ -9,10 +9,10 @@
 		a.route_basis AS "routeBasis",
 		a.rtable_maintain AS "rtableMaintain",
 		a.rtable_store AS "rtableStore",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
-		a.create_date AS "createDate",
-		a.create_by AS "createBy.id",
 		a.remarks AS "remarks",
 		a.del_flg AS "delFlg"
 	</sql>
@@ -78,10 +78,10 @@
 			route_basis,
 			rtable_maintain,
 			rtable_store,
+			create_by,
+			create_date,
 			update_by,
 			update_date,
-			create_date,
-			create_by,
 			remarks,
 			del_flg
 		) VALUES (
@@ -91,10 +91,10 @@
 			#{routeBasis},
 			#{rtableMaintain},
 			#{rtableStore},
+			#{createBy.id},
+			#{createDate},
 			#{updateBy.id},
 			#{updateDate},
-			#{createDate},
-			#{createBy.id},
 			#{remarks},
 			#{delFlg}
 		)
@@ -109,8 +109,7 @@
 			rtable_store = #{rtableStore},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
-			remarks = #{remarks},
-			del_flg = #{delFlg}
+			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
 	

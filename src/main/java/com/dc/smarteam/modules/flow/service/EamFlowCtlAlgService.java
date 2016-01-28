@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.flow.entity.EamFlowCtlAlg;
 import com.dc.smarteam.modules.flow.dao.EamFlowCtlAlgDao;
 
 /**
- * 流控算法管理模块Service
- * @author kern
- * @version 2015-12-24
+ * 流控管理Service
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

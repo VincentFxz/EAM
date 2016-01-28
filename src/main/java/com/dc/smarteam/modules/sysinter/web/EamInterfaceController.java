@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.sysinter.entity.EamInterface;
 import com.dc.smarteam.modules.sysinter.service.EamInterfaceService;
 
 /**
- * 接口清单Controller
+ * 接口管理Controller
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysinter/eamInterface")
@@ -55,6 +56,18 @@ public class EamInterfaceController extends BaseController {
 	}
 
 	@RequiresPermissions("sysinter:eamInterface:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "accountTrade", required = false) String accountTrade,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamInterface eamInterface = new EamInterface();
+        eamInterface.setAccountTrade(accountTrade);
+		Page<EamInterface> page = eamInterfaceService.findPage(new Page<EamInterface>(request, response), eamInterface);
+		model.addAttribute("page", page);
+		return "modules/sysinter/eamInterfaceList";
+	}
+
+	@RequiresPermissions("sysinter:eamInterface:view")
 	@RequestMapping(value = "form")
 	public String form(EamInterface eamInterface, Model model) {
 		model.addAttribute("eamInterface", eamInterface);
@@ -68,7 +81,7 @@ public class EamInterfaceController extends BaseController {
 			return form(eamInterface, model);
 		}
 		eamInterfaceService.save(eamInterface);
-		addMessage(redirectAttributes, "保存接口清单管理成功");
+		addMessage(redirectAttributes, "保存接口成功");
 		return "redirect:"+Global.getAdminPath()+"/sysinter/eamInterface/?repage";
 	}
 	
@@ -76,7 +89,7 @@ public class EamInterfaceController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamInterface eamInterface, RedirectAttributes redirectAttributes) {
 		eamInterfaceService.delete(eamInterface);
-		addMessage(redirectAttributes, "删除接口清单管理成功");
+		addMessage(redirectAttributes, "删除接口成功");
 		return "redirect:"+Global.getAdminPath()+"/sysinter/eamInterface/?repage";
 	}
 

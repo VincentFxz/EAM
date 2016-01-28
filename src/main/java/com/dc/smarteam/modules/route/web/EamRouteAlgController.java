@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.route.entity.EamRouteAlg;
 import com.dc.smarteam.modules.route.service.EamRouteAlgService;
 
 /**
- * 交易路由Controller
- * @author kern
- * @version 2015-12-24
+ * 路由管理Controller
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/route/eamRouteAlg")
@@ -55,6 +56,16 @@ public class EamRouteAlgController extends BaseController {
 	}
 
 	@RequiresPermissions("route:eamRouteAlg:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamRouteAlg eamRouteAlg = new EamRouteAlg();
+		Page<EamRouteAlg> page = eamRouteAlgService.findPage(new Page<EamRouteAlg>(request, response), eamRouteAlg);
+		model.addAttribute("page", page);
+		return "modules/route/eamRouteAlgList";
+	}
+
+	@RequiresPermissions("route:eamRouteAlg:view")
 	@RequestMapping(value = "form")
 	public String form(EamRouteAlg eamRouteAlg, Model model) {
 		model.addAttribute("eamRouteAlg", eamRouteAlg);
@@ -68,7 +79,7 @@ public class EamRouteAlgController extends BaseController {
 			return form(eamRouteAlg, model);
 		}
 		eamRouteAlgService.save(eamRouteAlg);
-		addMessage(redirectAttributes, "保存交易路由成功");
+		addMessage(redirectAttributes, "保存路由成功");
 		return "redirect:"+Global.getAdminPath()+"/route/eamRouteAlg/?repage";
 	}
 	
@@ -76,7 +87,7 @@ public class EamRouteAlgController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamRouteAlg eamRouteAlg, RedirectAttributes redirectAttributes) {
 		eamRouteAlgService.delete(eamRouteAlg);
-		addMessage(redirectAttributes, "删除交易路由成功");
+		addMessage(redirectAttributes, "删除路由成功");
 		return "redirect:"+Global.getAdminPath()+"/route/eamRouteAlg/?repage";
 	}
 

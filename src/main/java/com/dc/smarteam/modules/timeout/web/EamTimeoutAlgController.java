@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.timeout.entity.EamTimeoutAlg;
 import com.dc.smarteam.modules.timeout.service.EamTimeoutAlgService;
 
 /**
- * 超时时间管理Controller
- * @author kern
- * @version 2015-12-24
+ * 超时算法管理Controller
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/timeout/eamTimeoutAlg")
@@ -55,6 +56,16 @@ public class EamTimeoutAlgController extends BaseController {
 	}
 
 	@RequiresPermissions("timeout:eamTimeoutAlg:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamTimeoutAlg eamTimeoutAlg = new EamTimeoutAlg();
+		Page<EamTimeoutAlg> page = eamTimeoutAlgService.findPage(new Page<EamTimeoutAlg>(request, response), eamTimeoutAlg);
+		model.addAttribute("page", page);
+		return "modules/timeout/eamTimeoutAlgList";
+	}
+
+	@RequiresPermissions("timeout:eamTimeoutAlg:view")
 	@RequestMapping(value = "form")
 	public String form(EamTimeoutAlg eamTimeoutAlg, Model model) {
 		model.addAttribute("eamTimeoutAlg", eamTimeoutAlg);
@@ -68,7 +79,7 @@ public class EamTimeoutAlgController extends BaseController {
 			return form(eamTimeoutAlg, model);
 		}
 		eamTimeoutAlgService.save(eamTimeoutAlg);
-		addMessage(redirectAttributes, "保存超时时间管理成功");
+		addMessage(redirectAttributes, "保存超时算法成功");
 		return "redirect:"+Global.getAdminPath()+"/timeout/eamTimeoutAlg/?repage";
 	}
 	
@@ -76,7 +87,7 @@ public class EamTimeoutAlgController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamTimeoutAlg eamTimeoutAlg, RedirectAttributes redirectAttributes) {
 		eamTimeoutAlgService.delete(eamTimeoutAlg);
-		addMessage(redirectAttributes, "删除超时时间管理成功");
+		addMessage(redirectAttributes, "删除超时算法成功");
 		return "redirect:"+Global.getAdminPath()+"/timeout/eamTimeoutAlg/?repage";
 	}
 

@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.syslyr.entity.EamAaLayer;
 import com.dc.smarteam.modules.syslyr.dao.EamAaLayerDao;
 
 /**
- * 系统架构层次管理Service
- * @author yangqjb
- * @version 2015-12-24
+ * 架构层次管理Service
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Service
 @Transactional(readOnly = true)

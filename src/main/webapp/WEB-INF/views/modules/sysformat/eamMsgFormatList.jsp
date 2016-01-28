@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>报文格式管理管理</title>
+	<title>报文格式管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,15 +18,22 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sysformat/eamMsgFormat/">报文格式管理列表</a></li>
-		<shiro:hasPermission name="sysformat:eamMsgFormat:edit"><li><a href="${ctx}/sysformat/eamMsgFormat/form">报文格式管理添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/sysformat/eamMsgFormat/">报文格式列表</a></li>
+		<shiro:hasPermission name="sysformat:eamMsgFormat:edit"><li><a href="${ctx}/sysformat/eamMsgFormat/form">报文格式添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="eamMsgFormat" action="${ctx}/sysformat/eamMsgFormat/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>报文格式名称：</label>
-				<form:input path="name" htmlEscape="false" class="input-medium"/>
+			<li><label>报文格式名：</label>
+				<form:input path="name" htmlEscape="false" maxlength="255" class="input-medium"/>
+			</li>
+			<li><label>报文格式：</label>
+				<form:select path="format" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getDictList('eam_format')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</form:select>
+
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -37,12 +44,10 @@
 		<thead>
 			<tr>
 				<th>报文格式名称</th>
-				<th>报文格式中文名</th>
 				<th>报文格式</th>
 				<th>报文头</th>
 				<th>报文体</th>
 				<th>最大长度</th>
-				<th>更新者</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="sysformat:eamMsgFormat:edit"><th>操作</th></shiro:hasPermission>
@@ -55,10 +60,7 @@
 					${eamMsgFormat.name}
 				</a></td>
 				<td>
-					${eamMsgFormat.chineseName}
-				</td>
-				<td>
-					${eamMsgFormat.format}
+					${fns:getDictLabel(eamMsgFormat.format, 'eam_format', '')}
 				</td>
 				<td>
 					${eamMsgFormat.msgHead}
@@ -70,9 +72,6 @@
 					${eamMsgFormat.maxLength}
 				</td>
 				<td>
-					${eamMsgFormat.updateBy.id}
-				</td>
-				<td>
 					<fmt:formatDate value="${eamMsgFormat.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
@@ -80,7 +79,7 @@
 				</td>
 				<shiro:hasPermission name="sysformat:eamMsgFormat:edit"><td>
     				<a href="${ctx}/sysformat/eamMsgFormat/form?id=${eamMsgFormat.id}">修改</a>
-					<a href="${ctx}/sysformat/eamMsgFormat/delete?id=${eamMsgFormat.id}" onclick="return confirmx('确认要删除该报文格式管理吗？', this.href)">删除</a>
+					<a href="${ctx}/sysformat/eamMsgFormat/delete?id=${eamMsgFormat.id}" onclick="return confirmx('确认要删除该报文格式吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

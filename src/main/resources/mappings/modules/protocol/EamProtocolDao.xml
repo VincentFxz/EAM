@@ -6,15 +6,15 @@
 		a.id AS "id",
 		a.name AS "name",
 		a.chinese_name AS "chineseName",
-		a.update_by AS "updateBy.id",
-		a.update_date AS "updateDate",
-		a.create_date AS "createDate",
-		a.create_by AS "createBy.id",
-		a.remarks AS "remarks",
-		a.del_flg AS "delFlg",
 		a.address AS "address",
 		a.link_type AS "linkType",
-		a.maxpackage AS "maxpackage"
+		a.maxpackage AS "maxpackage",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flg AS "delFlg"
 	</sql>
 	
 	<sql id="eamProtocolJoins">
@@ -41,11 +41,8 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
-			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
+			<if test="linkType != null and linkType != ''">
+				AND a.link_type = #{linkType}
 			</if>
 		</where>
 		<choose>
@@ -81,28 +78,28 @@
 			id,
 			name,
 			chinese_name,
-			update_by,
-			update_date,
-			create_date,
-			create_by,
-			remarks,
-			del_flg,
 			address,
 			link_type,
-			maxpackage
+			maxpackage,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flg
 		) VALUES (
 			#{id},
 			#{name},
 			#{chineseName},
-			#{updateBy.id},
-			#{updateDate},
-			#{createDate},
-			#{createBy.id},
-			#{remarks},
-			#{delFlg},
 			#{address},
 			#{linkType},
-			#{maxpackage}
+			#{maxpackage},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlg}
 		)
 	</insert>
 	
@@ -110,13 +107,12 @@
 		UPDATE eam_protocol SET 	
 			name = #{name},
 			chinese_name = #{chineseName},
-			update_by = #{updateBy.id},
-			update_date = #{updateDate},
-			remarks = #{remarks},
-			del_flg = #{delFlg},
 			address = #{address},
 			link_type = #{linkType},
-			maxpackage = #{maxpackage}
+			maxpackage = #{maxpackage},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
 	

@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.sysinter.entity.EamInterface;
 import com.dc.smarteam.modules.sysinter.dao.EamInterfaceDao;
 
 /**
- * 接口清单Service
+ * 接口管理Service
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

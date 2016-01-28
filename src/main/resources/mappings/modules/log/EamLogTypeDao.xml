@@ -8,10 +8,10 @@
 		a.chinese_name AS "chineseName",
 		a.log_range AS "logRange",
 		a.log_clean_type AS "logCleanType",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
-		a.create_date AS "createDate",
-		a.create_by AS "createBy.id",
 		a.remarks AS "remarks",
 		a.del_flg AS "delFlg"
 	</sql>
@@ -76,10 +76,10 @@
 			chinese_name,
 			log_range,
 			log_clean_type,
+			create_by,
+			create_date,
 			update_by,
 			update_date,
-			create_date,
-			create_by,
 			remarks,
 			del_flg
 		) VALUES (
@@ -88,10 +88,10 @@
 			#{chineseName},
 			#{logRange},
 			#{logCleanType},
+			#{createBy.id},
+			#{createDate},
 			#{updateBy.id},
 			#{updateDate},
-			#{createDate},
-			#{createBy.id},
 			#{remarks},
 			#{delFlg}
 		)
@@ -105,8 +105,7 @@
 			log_clean_type = #{logCleanType},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
-			remarks = #{remarks},
-			del_flg = #{delFlg}
+			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
 	

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.syslyr.entity.EamAaLayer;
 import com.dc.smarteam.modules.syslyr.service.EamAaLayerService;
 
 /**
- * 系统架构层次管理Controller
- * @author yangqjb
- * @version 2015-12-24
+ * 架构层次管理Controller
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Controller
 @RequestMapping(value = "${adminPath}/syslyr/eamAaLayer")
@@ -50,6 +51,16 @@ public class EamAaLayerController extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(EamAaLayer eamAaLayer, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamAaLayer> page = eamAaLayerService.findPage(new Page<EamAaLayer>(request, response), eamAaLayer); 
+		model.addAttribute("page", page);
+		return "modules/syslyr/eamAaLayerList";
+	}
+
+	@RequiresPermissions("syslyr:eamAaLayer:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamAaLayer eamAaLayer = new EamAaLayer();
+		Page<EamAaLayer> page = eamAaLayerService.findPage(new Page<EamAaLayer>(request, response), eamAaLayer);
 		model.addAttribute("page", page);
 		return "modules/syslyr/eamAaLayerList";
 	}

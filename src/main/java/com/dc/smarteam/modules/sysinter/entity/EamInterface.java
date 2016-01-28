@@ -4,23 +4,24 @@
 package com.dc.smarteam.modules.sysinter.entity;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 接口清单Entity
+ * 接口管理Entity
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 public class EamInterface extends DataEntity<EamInterface> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 接口名称
 	private String chineseName;		// 接口中文名
-	private String eamLinknodeId;		// 所属关联节点编号
 	private String reqMsgFormat;		// 请求消息格式
 	private String rspMsgFormat;		// 响应消息格式
-	private String startDate;		// 启用时间
+	private Date startDate;		// 启用时间
 	private String accountTrade;		// 是否账务交易
 	
 	public EamInterface() {
@@ -31,6 +32,7 @@ public class EamInterface extends DataEntity<EamInterface> {
 		super(id);
 	}
 
+	@Length(min=1, max=255, message="接口名称长度必须介于 1 和 255 之间")
 	public String getName() {
 		return name;
 	}
@@ -46,15 +48,6 @@ public class EamInterface extends DataEntity<EamInterface> {
 
 	public void setChineseName(String chineseName) {
 		this.chineseName = chineseName;
-	}
-	
-	@Length(min=0, max=40, message="所属关联节点编号长度必须介于 0 和 40 之间")
-	public String getEamLinknodeId() {
-		return eamLinknodeId;
-	}
-
-	public void setEamLinknodeId(String eamLinknodeId) {
-		this.eamLinknodeId = eamLinknodeId;
 	}
 	
 	@Length(min=0, max=2047, message="请求消息格式长度必须介于 0 和 2047 之间")
@@ -75,12 +68,12 @@ public class EamInterface extends DataEntity<EamInterface> {
 		this.rspMsgFormat = rspMsgFormat;
 	}
 	
-	@Length(min=0, max=10, message="启用时间长度必须介于 0 和 10 之间")
-	public String getStartDate() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	

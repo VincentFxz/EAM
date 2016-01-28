@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 报文格式Entity
+ * 报文格式管理Entity
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 public class EamMsgFormat extends DataEntity<EamMsgFormat> {
 	
@@ -30,6 +30,7 @@ public class EamMsgFormat extends DataEntity<EamMsgFormat> {
 		super(id);
 	}
 
+	@Length(min=1, max=255, message="报文格式名称长度必须介于 1 和 255 之间")
 	public String getName() {
 		return name;
 	}

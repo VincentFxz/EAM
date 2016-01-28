@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 流控算法管理模块Entity
- * @author kern
- * @version 2015-12-24
+ * 流控管理Entity
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 public class EamFlowCtlAlg extends DataEntity<EamFlowCtlAlg> {
 	
@@ -36,7 +36,6 @@ public class EamFlowCtlAlg extends DataEntity<EamFlowCtlAlg> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=255, message="中文名称长度必须介于 0 和 255 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -45,7 +44,7 @@ public class EamFlowCtlAlg extends DataEntity<EamFlowCtlAlg> {
 		this.chineseName = chineseName;
 	}
 	
-	@Length(min=0, max=1, message="删除标记长度必须介于 0 和 1 之间")
+	@Length(min=1, max=1, message="删除标记长度必须介于 1 和 1 之间")
 	public String getDelFlg() {
 		return delFlg;
 	}

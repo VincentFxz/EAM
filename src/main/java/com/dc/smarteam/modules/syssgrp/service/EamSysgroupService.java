@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.syssgrp.entity.EamSysgroup;
 import com.dc.smarteam.modules.syssgrp.dao.EamSysgroupDao;
 
 /**
- * 应用系统群组管理Service
- * @author yangqjb
- * @version 2015-12-24
+ * 系统群组管理Service
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 @Service
 @Transactional(readOnly = true)

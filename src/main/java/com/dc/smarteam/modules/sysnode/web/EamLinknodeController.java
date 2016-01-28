@@ -6,7 +6,8 @@ package com.dc.smarteam.modules.sysnode.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dc.smarteam.modules.syslink.entity.EamSyslink;
+import com.dc.smarteam.modules.protocol.entity.EamProtocol;
+import com.dc.smarteam.modules.protocol.service.EamProtocolService;
 import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import com.dc.smarteam.modules.sysmng.service.EamSystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -28,9 +30,9 @@ import com.dc.smarteam.modules.sysnode.service.EamLinknodeService;
 import java.util.List;
 
 /**
- * 系统关联节点Controller
- * @author yangqjb
- * @version 2015-12-28
+ * 系统节点管理Controller
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysnode/eamLinknode")
@@ -38,8 +40,11 @@ public class EamLinknodeController extends BaseController {
 
 	@Autowired
 	private EamLinknodeService eamLinknodeService;
-    @Autowired
-    private EamSystemService eamSystemService;
+	@Autowired
+	private EamSystemService eamSystemService;
+	@Autowired
+	private EamProtocolService eamProtocolService;
+	
 	@ModelAttribute
 	public EamLinknode get(@RequestParam(required=false) String id) {
 		EamLinknode entity = null;
@@ -57,14 +62,32 @@ public class EamLinknodeController extends BaseController {
 	public String list(EamLinknode eamLinknode, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamLinknode> page = eamLinknodeService.findPage(new Page<EamLinknode>(request, response), eamLinknode);
 
-        List<EamLinknode> lst = page.getList();
-        for(int i=0;i<lst.size();i++){
-            lst.get(i).setEamSystem(eamSystemService.get(lst.get(i).getEamSystemId()));
-        }
-        page.setList(lst);
-        model.addAttribute("page", page);
+		List<EamLinknode> lst = page.getList();
+		for(int i=0;i<lst.size();i++){
+			lst.get(i).setEamSystem(eamSystemService.get(lst.get(i).getEamSystemId()));
+			lst.get(i).setEamProtocol(eamProtocolService.get(lst.get(i).getEamProtocolId()));
+		}
+		model.addAttribute("page", page);
+		model.addAttribute("eamSystemIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamProtocolIdList",eamProtocolService.findList(new EamProtocol()));
+		return "modules/sysnode/eamLinknodeList";
+	}
 
-        model.addAttribute("systems", eamSystemService.findList(new EamSystem()));
+	@RequiresPermissions("sysnode:eamLinknode:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "eamSystemId", required = false) String eamSystemId,
+	@RequestParam(value = "linknodeType", required = false) String linknodeType,
+	@RequestParam(value = "eamProtocolId", required = false) String eamProtocolId,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamLinknode eamLinknode = new EamLinknode();
+        eamLinknode.setEamSystemId(eamSystemId);
+        eamLinknode.setLinknodeType(linknodeType);
+        eamLinknode.setEamProtocolId(eamProtocolId);
+		Page<EamLinknode> page = eamLinknodeService.findPage(new Page<EamLinknode>(request, response), eamLinknode);
+		model.addAttribute("page", page);
+		model.addAttribute("eamSystemIdList", eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamProtocolIdList",eamProtocolService.findList(new EamProtocol()));
 		return "modules/sysnode/eamLinknodeList";
 	}
 
@@ -72,8 +95,8 @@ public class EamLinknodeController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(EamLinknode eamLinknode, Model model) {
 		model.addAttribute("eamLinknode", eamLinknode);
-
-        model.addAttribute("systems", eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamProtocolIdList",eamProtocolService.findList(new EamProtocol()));
 		return "modules/sysnode/eamLinknodeForm";
 	}
 

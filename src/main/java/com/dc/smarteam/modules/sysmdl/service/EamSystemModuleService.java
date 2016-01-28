@@ -15,8 +15,8 @@ import com.dc.smarteam.modules.sysmdl.dao.EamSystemModuleDao;
 
 /**
  * 系统模块管理Service
- * @author yangqjb
- * @version 2015-12-23
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 @Service
 @Transactional(readOnly = true)

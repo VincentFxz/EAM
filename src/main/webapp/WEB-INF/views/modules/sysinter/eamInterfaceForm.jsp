@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>接口清单管理</title>
+	<title>接口管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,16 +27,17 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sysinter/eamInterface/">接口清单管理列表</a></li>
-		<li class="active"><a href="${ctx}/sysinter/eamInterface/form?id=${eamInterface.id}">接口清单管理<shiro:hasPermission name="sysinter:eamInterface:edit">${not empty eamInterface.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sysinter:eamInterface:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sysinter/eamInterface/">接口列表</a></li>
+		<li class="active"><a href="${ctx}/sysinter/eamInterface/form?id=${eamInterface.id}">接口<shiro:hasPermission name="sysinter:eamInterface:edit">${not empty eamInterface.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sysinter:eamInterface:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
+	<div style="position:absolute;left:0px;width:80%">
 	<form:form id="inputForm" modelAttribute="eamInterface" action="${ctx}/sysinter/eamInterface/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
 			<label class="control-label">接口名称：</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" class="input-xlarge required"/>
+				<form:input path="name" htmlEscape="false" maxlength="255" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -44,12 +45,6 @@
 			<label class="control-label">接口中文名：</label>
 			<div class="controls">
 				<form:input path="chineseName" htmlEscape="false" maxlength="255" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">所属关联节点编号：</label>
-			<div class="controls">
-				<form:input path="eamLinknodeId" htmlEscape="false" maxlength="40" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -67,9 +62,9 @@
 		<div class="control-group">
 			<label class="control-label">启用时间：</label>
 			<div class="controls">
-
-				<input id="beginDate" name="beginDate" type="text" readonly="readonly" maxlength="20" class="input-mini Wdate"
-					   value="<fmt:formatDate value="${log.beginDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+				<input name="startDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${eamInterface.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -79,6 +74,8 @@
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<sys:dict description="是否账务交易" type="yes_no" sort="${(fns:getDictList('yes_no').size()+1)*30}"/>
+
 			</div>
 		</div>
 		<div class="control-group">
@@ -92,5 +89,12 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	    </div>
+    <div style="position:absolute;left:80%">
+        <ul class="nav">
+            <!-- 请将 param 替换为具体参数 -->
+            <%--<li><a href="${ctx}/sysnode/eamLinknode/param?param=${param}&param1=param1">${not empty eamInterface.id?'相关实体':''}</a></li><br>--%>
+        </ul>
+    </div>
 </body>
 </html>

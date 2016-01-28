@@ -331,8 +331,8 @@ public class UserController extends BaseController {
 		}
 		model.addAttribute("user", user);
 		return "modules/sys/userModifyPwd";
-	}
-	
+
+}
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")

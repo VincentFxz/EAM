@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import com.dc.smarteam.modules.sysmng.dao.EamSystemDao;
 
 /**
- * 系统管理Service
- * @author yangqjb
- * @version 2015-12-24
+ * 应用系统管理Service
+ * @author zhanghaor
+ * @version 2016-01-20
  */
 @Service
 @Transactional(readOnly = true)

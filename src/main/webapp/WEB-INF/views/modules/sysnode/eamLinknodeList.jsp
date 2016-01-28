@@ -25,23 +25,29 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>名称：</label>
+			<li><label>节点名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
-			<li><label>中文名称：</label>
-				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-medium"/>
-			</li>
-			<li><label>所属系统：</label>
-				<form:select path="eamSystemId" class="input-medium">
+			<li><label>节点系统：</label>
+				<form:select path="eamSystemId" class="input-xlarge required">
 					<form:option value="" label=""/>
-					<form:options items="${systems}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					<form:options items="${eamSystemIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
+
 			</li>
 			<li><label>节点类型：</label>
 				<form:select path="linknodeType" class="input-medium">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('linknode_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+
+			</li>
+			<li><label>通讯协议：</label>
+				<form:select path="eamProtocolId" class="input-xlarge required">
+					<form:option value="" label=""/>
+					<form:options items="${eamProtocolIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
@@ -51,10 +57,10 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>名称</th>
-				<th>中文名称</th>
-				<th>所属系统</th>
+				<th>节点名称</th>
+				<th>节点系统</th>
 				<th>节点类型</th>
+				<th>通讯协议</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="sysnode:eamLinknode:edit"><th>操作</th></shiro:hasPermission>
@@ -67,14 +73,12 @@
 					${eamLinknode.name}
 				</a></td>
 				<td>
-					${eamLinknode.chineseName}
-				</td>
-				<td>
-                    <a href="javascript:" onclick="$('#eamSystemId').val('${eamLinknode.eamSystem.id}');$('#searchForm').submit();return false;">${eamLinknode.eamSystem.name}</a>
-				</td>
+					<a href="javascript:" onclick="$('#eamSystemId').val('${eamLinknode.eamSystem.id}');$('#searchForm').submit();return false;">${eamLinknode.eamSystem.name}</a>				</td>
 				<td>
 					${fns:getDictLabel(eamLinknode.linknodeType, 'linknode_type', '')}
 				</td>
+				<td>
+					<a href="javascript:" onclick="$('#eamProtocolId').val('${eamLinknode.eamProtocol.id}');$('#searchForm').submit();return false;">${eamLinknode.eamProtocol.name}</a>				</td>
 				<td>
 					<fmt:formatDate value="${eamLinknode.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>

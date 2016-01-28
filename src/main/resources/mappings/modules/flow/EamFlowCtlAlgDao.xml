@@ -6,10 +6,10 @@
 		a.id AS "id",
 		a.name AS "name",
 		a.chinese_name AS "chineseName",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
-		a.create_date AS "createDate",
-		a.create_by AS "createBy.id",
 		a.remarks AS "remarks",
 		a.del_flg AS "delFlg"
 	</sql>
@@ -72,20 +72,20 @@
 			id,
 			name,
 			chinese_name,
+			create_by,
+			create_date,
 			update_by,
 			update_date,
-			create_date,
-			create_by,
 			remarks,
 			del_flg
 		) VALUES (
 			#{id},
 			#{name},
 			#{chineseName},
+			#{createBy.id},
+			#{createDate},
 			#{updateBy.id},
 			#{updateDate},
-			#{createDate},
-			#{createBy.id},
 			#{remarks},
 			#{delFlg}
 		)
@@ -97,8 +97,7 @@
 			chinese_name = #{chineseName},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
-			remarks = #{remarks},
-			del_flg = #{delFlg}
+			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
 	

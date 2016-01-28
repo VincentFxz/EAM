@@ -8,9 +8,9 @@ import com.dc.smarteam.common.persistence.annotation.MyBatisDao;
 import com.dc.smarteam.modules.sysnode.entity.EamLinknode;
 
 /**
- * 系统关联节点DAO接口
- * @author yangqjb
- * @version 2015-12-28
+ * 系统节点管理DAO接口
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @MyBatisDao
 public interface EamLinknodeDao extends CrudDao<EamLinknode> {

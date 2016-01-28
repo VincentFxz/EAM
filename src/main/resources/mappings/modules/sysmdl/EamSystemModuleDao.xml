@@ -4,9 +4,9 @@
     
 	<sql id="eamSystemModuleColumns">
 		a.id AS "id",
-		a.eam_system_id AS "eamSystemId",
 		a.name AS "name",
 		a.chinese_name AS "chineseName",
+		a.eam_system_id AS "eamSystemId",
 		a.manager AS "manager.id",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
@@ -35,9 +35,6 @@
 		<include refid="eamSystemModuleJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			<if test="eamSystemId != null and eamSystemId != ''">
-				AND a.eam_system_id = #{eamSystemId}
-			</if>
 			<if test="name != null and name != ''">
 				AND a.name LIKE 
 					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
@@ -45,10 +42,10 @@
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
 			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{chineseName}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{chineseName}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{chineseName},'%')</if>
+				AND a.chinese_name = #{chineseName}
+			</if>
+			<if test="eamSystemId != null and eamSystemId != ''">
+				AND a.eam_system_id = #{eamSystemId}
 			</if>
 			<if test="manager != null and manager.id != null and manager.id != ''">
 				AND a.manager = #{manager.id}
@@ -85,9 +82,9 @@
 	<insert id="insert">
 		INSERT INTO eam_system_module(
 			id,
-			eam_system_id,
 			name,
 			chinese_name,
+			eam_system_id,
 			manager,
 			create_by,
 			create_date,
@@ -97,9 +94,9 @@
 			del_flag
 		) VALUES (
 			#{id},
-			#{eamSystemId},
 			#{name},
 			#{chineseName},
+			#{eamSystemId},
 			#{manager.id},
 			#{createBy.id},
 			#{createDate},
@@ -112,12 +109,10 @@
 	
 	<update id="update">
 		UPDATE eam_system_module SET 	
-			eam_system_id = #{eamSystemId},
 			name = #{name},
 			chinese_name = #{chineseName},
+			eam_system_id = #{eamSystemId},
 			manager = #{manager.id},
-			create_by = #{createBy.id},
-			create_date = #{createDate},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}

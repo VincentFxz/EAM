@@ -6,6 +6,8 @@ package com.dc.smarteam.modules.sysstr.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dc.smarteam.modules.sysmng.entity.EamSystem;
+import com.dc.smarteam.modules.sysmng.service.EamSystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -22,15 +25,12 @@ import com.dc.smarteam.common.utils.StringUtils;
 import com.dc.smarteam.modules.sysstr.entity.EamAaStrategy;
 import com.dc.smarteam.modules.sysstr.service.EamAaStrategyService;
 
+import java.util.List;
+
 /**
-<<<<<<< HEAD:src/main/java/com/dc/smarteam/modules/sysstr/web/EamAaStrategyController.java
- * 应用系统决策管理Controller
- * @author yangqjb
-=======
- * 决策点管理Controller
+ * 系统决策管理Controller
  * @author zhanghaor
->>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/java/com/dc/smarteam/modules/strategy/web/EamAaStrategyController.java
- * @version 2015-12-24
+ * @version 2016-01-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysstr/eamAaStrategy")
@@ -38,6 +38,9 @@ public class EamAaStrategyController extends BaseController {
 
 	@Autowired
 	private EamAaStrategyService eamAaStrategyService;
+
+	@Autowired
+	private EamSystemService eamSystemService;
 	
 	@ModelAttribute
 	public EamAaStrategy get(@RequestParam(required=false) String id) {
@@ -54,8 +57,29 @@ public class EamAaStrategyController extends BaseController {
 	@RequiresPermissions("sysstr:eamAaStrategy:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(EamAaStrategy eamAaStrategy, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<EamAaStrategy> page = eamAaStrategyService.findPage(new Page<EamAaStrategy>(request, response), eamAaStrategy); 
+
+		Page<EamAaStrategy> page = eamAaStrategyService.findPage(new Page<EamAaStrategy>(request, response), eamAaStrategy);
+		List<EamAaStrategy> lst = page.getList();
+		for(int i=0;i<lst.size();i++){
+			lst.get(i).setEamSystem(eamSystemService.get(lst.get(i).getEamSystemId()));
+		}
+		page.setList(lst);
+
 		model.addAttribute("page", page);
+		model.addAttribute("eamSystemIdList", eamSystemService.findList(new EamSystem()));
+		return "modules/sysstr/eamAaStrategyList";
+	}
+
+	@RequiresPermissions("sysstr:eamAaStrategy:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "eamSystemId", required = false) String eamSystemId,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamAaStrategy eamAaStrategy = new EamAaStrategy();
+        eamAaStrategy.setEamSystemId(eamSystemId);
+		Page<EamAaStrategy> page = eamAaStrategyService.findPage(new Page<EamAaStrategy>(request, response), eamAaStrategy);
+		model.addAttribute("page", page);
+		model.addAttribute("eamSystemIdList", eamSystemService.findList(new EamSystem()));
 		return "modules/sysstr/eamAaStrategyList";
 	}
 
@@ -63,6 +87,7 @@ public class EamAaStrategyController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(EamAaStrategy eamAaStrategy, Model model) {
 		model.addAttribute("eamAaStrategy", eamAaStrategy);
+		model.addAttribute("eamSystemIdList", eamSystemService.findList(new EamSystem()));
 		return "modules/sysstr/eamAaStrategyForm";
 	}
 

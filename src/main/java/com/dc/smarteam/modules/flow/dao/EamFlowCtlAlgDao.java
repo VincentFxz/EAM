@@ -8,9 +8,9 @@ import com.dc.smarteam.common.persistence.annotation.MyBatisDao;
 import com.dc.smarteam.modules.flow.entity.EamFlowCtlAlg;
 
 /**
- * 流控算法管理模块DAO接口
- * @author kern
- * @version 2015-12-24
+ * 流控管理DAO接口
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @MyBatisDao
 public interface EamFlowCtlAlgDao extends CrudDao<EamFlowCtlAlg> {

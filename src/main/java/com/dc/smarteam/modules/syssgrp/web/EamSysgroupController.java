@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.syssgrp.entity.EamSysgroup;
 import com.dc.smarteam.modules.syssgrp.service.EamSysgroupService;
 
 /**
- * 应用系统群组管理Controller
- * @author yangqjb
- * @version 2015-12-24
+ * 系统群组管理Controller
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/syssgrp/eamSysgroup")
@@ -50,6 +51,16 @@ public class EamSysgroupController extends BaseController {
 	@RequestMapping(value = {"list", ""})
 	public String list(EamSysgroup eamSysgroup, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<EamSysgroup> page = eamSysgroupService.findPage(new Page<EamSysgroup>(request, response), eamSysgroup); 
+		model.addAttribute("page", page);
+		return "modules/syssgrp/eamSysgroupList";
+	}
+
+	@RequiresPermissions("syssgrp:eamSysgroup:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamSysgroup eamSysgroup = new EamSysgroup();
+		Page<EamSysgroup> page = eamSysgroupService.findPage(new Page<EamSysgroup>(request, response), eamSysgroup);
 		model.addAttribute("page", page);
 		return "modules/syssgrp/eamSysgroupList";
 	}

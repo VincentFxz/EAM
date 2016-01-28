@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>流控算法管理模块管理</title>
+	<title>流控管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/flow/eamFlowCtlAlg/">流控算法管理模块列表</a></li>
-		<shiro:hasPermission name="flow:eamFlowCtlAlg:edit"><li><a href="${ctx}/flow/eamFlowCtlAlg/form">流控算法管理模块添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/flow/eamFlowCtlAlg/">流控列表</a></li>
+		<shiro:hasPermission name="flow:eamFlowCtlAlg:edit"><li><a href="${ctx}/flow/eamFlowCtlAlg/form">流控添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="eamFlowCtlAlg" action="${ctx}/flow/eamFlowCtlAlg/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -37,6 +37,7 @@
 		<thead>
 			<tr>
 				<th>流控名称</th>
+				<th>中文名称</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="flow:eamFlowCtlAlg:edit"><th>操作</th></shiro:hasPermission>
@@ -49,6 +50,9 @@
 					${eamFlowCtlAlg.name}
 				</a></td>
 				<td>
+					${eamFlowCtlAlg.chineseName}
+				</td>
+				<td>
 					<fmt:formatDate value="${eamFlowCtlAlg.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
@@ -56,7 +60,7 @@
 				</td>
 				<shiro:hasPermission name="flow:eamFlowCtlAlg:edit"><td>
     				<a href="${ctx}/flow/eamFlowCtlAlg/form?id=${eamFlowCtlAlg.id}">修改</a>
-					<a href="${ctx}/flow/eamFlowCtlAlg/delete?id=${eamFlowCtlAlg.id}" onclick="return confirmx('确认要删除该流控算法管理模块吗？', this.href)">删除</a>
+					<a href="${ctx}/flow/eamFlowCtlAlg/delete?id=${eamFlowCtlAlg.id}" onclick="return confirmx('确认要删除该流控吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

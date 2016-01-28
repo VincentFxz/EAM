@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 交易路由Entity
- * @author kern
- * @version 2015-12-24
+ * 路由管理Entity
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 	
@@ -18,8 +18,8 @@ public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 	private String name;		// 路由名称
 	private String chineseName;		// 路由简称
 	private String routeBasis;		// 基础路由
-	private String rtableMaintain;		// RTABLE_MAINTAIN
-	private String rtableStore;		// RTABLE_STORE
+	private String rtableMaintain;		// 路由表维护
+	private String rtableStore;		// 路由表存储
 	private String delFlg;		// 删除标记
 	
 	public EamRouteAlg() {
@@ -39,7 +39,6 @@ public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=255, message="路由简称长度必须介于 0 和 255 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -57,7 +56,7 @@ public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 		this.routeBasis = routeBasis;
 	}
 	
-	@Length(min=0, max=255, message="RTABLE_MAINTAIN长度必须介于 0 和 255 之间")
+	@Length(min=0, max=255, message="路由表维护长度必须介于 0 和 255 之间")
 	public String getRtableMaintain() {
 		return rtableMaintain;
 	}
@@ -66,7 +65,7 @@ public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 		this.rtableMaintain = rtableMaintain;
 	}
 	
-	@Length(min=0, max=255, message="RTABLE_STORE长度必须介于 0 和 255 之间")
+	@Length(min=0, max=255, message="路由表存储长度必须介于 0 和 255 之间")
 	public String getRtableStore() {
 		return rtableStore;
 	}
@@ -75,7 +74,7 @@ public class EamRouteAlg extends DataEntity<EamRouteAlg> {
 		this.rtableStore = rtableStore;
 	}
 	
-	@Length(min=0, max=1, message="删除标记长度必须介于 0 和 1 之间")
+	@Length(min=1, max=1, message="删除标记长度必须介于 1 和 1 之间")
 	public String getDelFlg() {
 		return delFlg;
 	}

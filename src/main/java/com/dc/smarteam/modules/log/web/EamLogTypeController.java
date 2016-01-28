@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.log.entity.EamLogType;
 import com.dc.smarteam.modules.log.service.EamLogTypeService;
 
 /**
- * 流水日志Controller
- * @author kern
- * @version 2015-12-24
+ * 日志管理Controller
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/log/eamLogType")
@@ -55,6 +56,16 @@ public class EamLogTypeController extends BaseController {
 	}
 
 	@RequiresPermissions("log:eamLogType:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamLogType eamLogType = new EamLogType();
+		Page<EamLogType> page = eamLogTypeService.findPage(new Page<EamLogType>(request, response), eamLogType);
+		model.addAttribute("page", page);
+		return "modules/log/eamLogTypeList";
+	}
+
+	@RequiresPermissions("log:eamLogType:view")
 	@RequestMapping(value = "form")
 	public String form(EamLogType eamLogType, Model model) {
 		model.addAttribute("eamLogType", eamLogType);
@@ -68,7 +79,7 @@ public class EamLogTypeController extends BaseController {
 			return form(eamLogType, model);
 		}
 		eamLogTypeService.save(eamLogType);
-		addMessage(redirectAttributes, "保存流水日志成功");
+		addMessage(redirectAttributes, "保存日志成功");
 		return "redirect:"+Global.getAdminPath()+"/log/eamLogType/?repage";
 	}
 	
@@ -76,7 +87,7 @@ public class EamLogTypeController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamLogType eamLogType, RedirectAttributes redirectAttributes) {
 		eamLogTypeService.delete(eamLogType);
-		addMessage(redirectAttributes, "删除流水日志成功");
+		addMessage(redirectAttributes, "删除日志成功");
 		return "redirect:"+Global.getAdminPath()+"/log/eamLogType/?repage";
 	}
 

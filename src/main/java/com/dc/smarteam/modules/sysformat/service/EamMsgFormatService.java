@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.sysformat.entity.EamMsgFormat;
 import com.dc.smarteam.modules.sysformat.dao.EamMsgFormatDao;
 
 /**
- * 报文格式Service
+ * 报文格式管理Service
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

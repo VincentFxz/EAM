@@ -8,9 +8,9 @@ import com.dc.smarteam.common.persistence.annotation.MyBatisDao;
 import com.dc.smarteam.modules.log.entity.EamLogType;
 
 /**
- * 流水日志DAO接口
- * @author kern
- * @version 2015-12-24
+ * 日志管理DAO接口
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @MyBatisDao
 public interface EamLogTypeDao extends CrudDao<EamLogType> {

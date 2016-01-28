@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 应用系统群组管理Entity
- * @author yangqjb
- * @version 2015-12-24
+ * 系统群组管理Entity
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 public class EamSysgroup extends DataEntity<EamSysgroup> {
 	

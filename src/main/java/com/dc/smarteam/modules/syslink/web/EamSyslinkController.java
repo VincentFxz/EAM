@@ -6,7 +6,8 @@ package com.dc.smarteam.modules.syslink.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dc.smarteam.modules.sys.utils.DictUtils;
+import com.dc.smarteam.modules.sysmng.entity.EamSystem;
+import com.dc.smarteam.modules.sysmng.service.EamSystemService;
 import com.dc.smarteam.modules.sysnode.entity.EamLinknode;
 import com.dc.smarteam.modules.sysnode.service.EamLinknodeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -28,19 +30,21 @@ import com.dc.smarteam.modules.syslink.service.EamSyslinkService;
 import java.util.List;
 
 /**
- * 系统关联关系Controller
- * @author yangqjb
- * @version 2015-12-28
+ * 节点关联管理Controller
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Controller
 @RequestMapping(value = "${adminPath}/syslink/eamSyslink")
 public class EamSyslinkController extends BaseController {
 
-    @Autowired
-    private EamSyslinkService eamSyslinkService;
-    @Autowired
-    private EamLinknodeService eamLinknodeService;
-
+	@Autowired
+	private EamSyslinkService eamSyslinkService;
+	@Autowired
+	private EamSystemService eamSystemService;
+	@Autowired
+	private EamLinknodeService eamLinknodeService;
+	
 	@ModelAttribute
 	public EamSyslink get(@RequestParam(required=false) String id) {
 		EamSyslink entity = null;
@@ -56,17 +60,47 @@ public class EamSyslinkController extends BaseController {
 	@RequiresPermissions("syslink:eamSyslink:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(EamSyslink eamSyslink, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<EamSyslink> page = eamSyslinkService.findPage(new Page<EamSyslink>(request, response), eamSyslink);
 
-        Page<EamSyslink> page = eamSyslinkService.findPage(new Page<EamSyslink>(request, response), eamSyslink);
-
-        List<EamSyslink> lst = page.getList();
-        for(int i=0;i<lst.size();i++){
-            lst.get(i).setStartLinknode(eamLinknodeService.get(lst.get(i).getStartLinknodeId()));
-            lst.get(i).setEndLinknode(eamLinknodeService.get(lst.get(i).getEndLinknodeId()));
-        }
-        page.setList(lst);
+		List<EamSyslink> lst = page.getList();
+		for(int i=0;i<lst.size();i++){
+			lst.get(i).setEamSystemStart(eamSystemService.get(lst.get(i).getEamSystemStartId()));
+		    lst.get(i).setEamSystemEnd(eamSystemService.get(lst.get(i).getEamSystemEndId()));
+			lst.get(i).setStartLinknode(eamLinknodeService.get(lst.get(i).getStartLinknodeId()));
+			lst.get(i).setEndLinknode(eamLinknodeService.get(lst.get(i).getEndLinknodeId()));
+		}
+		page.setList(lst);
 		model.addAttribute("page", page);
+		model.addAttribute("eamSystemStartIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemEndIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("startLinknodeIdList",eamLinknodeService.findList(new EamLinknode()));
+		model.addAttribute("endLinknodeIdList",eamLinknodeService.findList(new EamLinknode()));
+		return "modules/syslink/eamSyslinkList";
+	}
 
+	@RequiresPermissions("syslink:eamSyslink:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "linkType", required = false) String linkType,
+	@RequestParam(value = "eamSystemStartId", required = false) String eamSystemStartId,
+	@RequestParam(value = "startLinknodeId", required = false) String startLinknodeId,
+	@RequestParam(value = "eamSystemEndId", required = false) String eamSystemEndId,
+	@RequestParam(value = "endLinknodeId", required = false) String endLinknodeId,
+	@RequestParam(value = "linkStatus", required = false) String linkStatus,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamSyslink eamSyslink = new EamSyslink();
+        eamSyslink.setLinkType(linkType);
+        eamSyslink.setEamSystemStartId(eamSystemStartId);
+        eamSyslink.setStartLinknodeId(startLinknodeId);
+        eamSyslink.setEamSystemEndId(eamSystemEndId);
+        eamSyslink.setEndLinknodeId(endLinknodeId);
+        eamSyslink.setLinkStatus(linkStatus);
+		Page<EamSyslink> page = eamSyslinkService.findPage(new Page<EamSyslink>(request, response), eamSyslink);
+		model.addAttribute("page", page);
+		model.addAttribute("eamSystemStartIdList", eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemEndIdList", eamSystemService.findList(new EamSystem()));
+		model.addAttribute("startLinknodeIdList", eamLinknodeService.findList(new EamLinknode()));
+		model.addAttribute("endLinknodeIdList",eamLinknodeService.findList(new EamLinknode()));
 		return "modules/syslink/eamSyslinkList";
 	}
 
@@ -74,10 +108,10 @@ public class EamSyslinkController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(EamSyslink eamSyslink, Model model) {
 		model.addAttribute("eamSyslink", eamSyslink);
-
-        EamLinknode nodes = new EamLinknode();
-        model.addAttribute("start_nodes", eamLinknodeService.findList(nodes));
-        model.addAttribute("end_nodes", eamLinknodeService.findList(nodes));
+		model.addAttribute("eamSystemStartIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemEndIdList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("startLinknodeIdList",eamLinknodeService.findList(new EamLinknode()));
+		model.addAttribute("endLinknodeIdList",eamLinknodeService.findList(new EamLinknode()));
 		return "modules/syslink/eamSyslinkForm";
 	}
 
@@ -88,7 +122,7 @@ public class EamSyslinkController extends BaseController {
 			return form(eamSyslink, model);
 		}
 		eamSyslinkService.save(eamSyslink);
-		addMessage(redirectAttributes, "保存关联关系成功");
+		addMessage(redirectAttributes, "保存节点关联成功");
 		return "redirect:"+Global.getAdminPath()+"/syslink/eamSyslink/?repage";
 	}
 	
@@ -96,7 +130,7 @@ public class EamSyslinkController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamSyslink eamSyslink, RedirectAttributes redirectAttributes) {
 		eamSyslinkService.delete(eamSyslink);
-		addMessage(redirectAttributes, "删除关联关系成功");
+		addMessage(redirectAttributes, "删除节点关联成功");
 		return "redirect:"+Global.getAdminPath()+"/syslink/eamSyslink/?repage";
 	}
 

@@ -9,8 +9,8 @@ import com.dc.smarteam.modules.sysmdl.entity.EamSystemModule;
 
 /**
  * 系统模块管理DAO接口
- * @author yangqjb
- * @version 2015-12-23
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 @MyBatisDao
 public interface EamSystemModuleDao extends CrudDao<EamSystemModule> {

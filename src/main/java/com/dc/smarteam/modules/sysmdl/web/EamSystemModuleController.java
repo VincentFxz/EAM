@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -24,10 +25,12 @@ import com.dc.smarteam.common.utils.StringUtils;
 import com.dc.smarteam.modules.sysmdl.entity.EamSystemModule;
 import com.dc.smarteam.modules.sysmdl.service.EamSystemModuleService;
 
+import java.util.List;
+
 /**
  * 系统模块管理Controller
- * @author yangqjb
- * @version 2015-12-23
+ * @author zhanghaor
+ * @version 2016-01-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sysmdl/eamSystemModule")
@@ -35,8 +38,10 @@ public class EamSystemModuleController extends BaseController {
 
 	@Autowired
 	private EamSystemModuleService eamSystemModuleService;
-    @Autowired
-    private EamSystemService eamSystemService;
+	@Autowired
+	private EamSystemService eamSystemService;
+
+	
 	@ModelAttribute
 	public EamSystemModule get(@RequestParam(required=false) String id) {
 		EamSystemModule entity = null;
@@ -52,9 +57,23 @@ public class EamSystemModuleController extends BaseController {
 	@RequiresPermissions("sysmdl:eamSystemModule:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(EamSystemModule eamSystemModule, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<EamSystemModule> page = eamSystemModuleService.findPage(new Page<EamSystemModule>(request, response), eamSystemModule); 
+		Page<EamSystemModule> page = eamSystemModuleService.findPage(new Page<EamSystemModule>(request, response), eamSystemModule);
+
 		model.addAttribute("page", page);
-        model.addAttribute("sysList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemIdList",eamSystemService.findList(new EamSystem()));
+		return "modules/sysmdl/eamSystemModuleList";
+	}
+
+	@RequiresPermissions("sysmdl:eamSystemModule:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	@RequestParam(value = "eamSystemId", required = false) String eamSystemId,
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamSystemModule eamSystemModule = new EamSystemModule();
+        eamSystemModule.setEamSystemId(eamSystemId);
+		Page<EamSystemModule> page = eamSystemModuleService.findPage(new Page<EamSystemModule>(request, response), eamSystemModule);
+		model.addAttribute("page", page);
+		model.addAttribute("eamSystemIdList",eamSystemService.findList(new EamSystem()));
 		return "modules/sysmdl/eamSystemModuleList";
 	}
 
@@ -62,7 +81,7 @@ public class EamSystemModuleController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(EamSystemModule eamSystemModule, Model model) {
 		model.addAttribute("eamSystemModule", eamSystemModule);
-        model.addAttribute("sysList",eamSystemService.findList(new EamSystem()));
+		model.addAttribute("eamSystemIdList",eamSystemService.findList(new EamSystem()));
 		return "modules/sysmdl/eamSystemModuleForm";
 	}
 
@@ -73,7 +92,7 @@ public class EamSystemModuleController extends BaseController {
 			return form(eamSystemModule, model);
 		}
 		eamSystemModuleService.save(eamSystemModule);
-		addMessage(redirectAttributes, "保存模块成功");
+		addMessage(redirectAttributes, "保存系统模块成功");
 		return "redirect:"+Global.getAdminPath()+"/sysmdl/eamSystemModule/?repage";
 	}
 	
@@ -81,7 +100,7 @@ public class EamSystemModuleController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamSystemModule eamSystemModule, RedirectAttributes redirectAttributes) {
 		eamSystemModuleService.delete(eamSystemModule);
-		addMessage(redirectAttributes, "删除模块成功");
+		addMessage(redirectAttributes, "删除系统模块成功");
 		return "redirect:"+Global.getAdminPath()+"/sysmdl/eamSystemModule/?repage";
 	}
 

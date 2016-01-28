@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>模块管理</title>
+	<title>系统模块管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,29 +18,34 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sysmdl/eamSystemModule/">模块列表</a></li>
-		<shiro:hasPermission name="sysmdl:eamSystemModule:edit"><li><a href="${ctx}/sysmdl/eamSystemModule/form">模块添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/sysmdl/eamSystemModule/">系统模块列表</a></li>
+		<shiro:hasPermission name="sysmdl:eamSystemModule:edit"><li><a href="${ctx}/sysmdl/eamSystemModule/form">系统模块添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="eamSystemModule" action="${ctx}/sysmdl/eamSystemModule/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>所属系统：</label>
-				<form:select path="eamSystemId" class="input-medium">
-					<form:option value="" label=""/>
-                    <form:options items="${sysList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
-				</form:select>
-			</li>
 			<li><label>模块名称：</label>
-				<form:input path="name" htmlEscape="false" maxlength="255" class="input-medium"/>
+				<form:input path="name" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
 			<li><label>中文名称：</label>
-				<form:input path="chineseName" htmlEscape="false" maxlength="382.5" class="input-medium"/>
+				<form:input path="chineseName" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
+			<li><label>所属系统：</label>
+				<form:select path="eamSystemId" class="input-xlarge required">
+					<form:option value="" label=""/>
+					<form:options items="${eamSystemIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+
+			</li>
+			<%--<li><label>模块负责人：</label>--%>
+				<%--<sys:treeselect id="manager" name="manager.id" value="${eamSystemModule.manager.id}" labelName="" labelValue="${eamSystemModule.}"--%>
+					<%--title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>--%>
+			<%--</li>--%>
 			<li><label>模块负责人：</label>
-                <sys:treeselect id="manager" name="manager" value="${eamSystemModule.manager.id}" labelName="eamSystemModule.manager.name" labelValue="${eamSystemModule.manager.name}"
-                                title="用户" url="/sys/office/treeData?type=3" allowClear="true" notAllowSelectParent="true"/>
-            </li>
+				<sys:treeselect id="manager" name="manager" value="${eamSystemModule.manager.id}" labelName="eamSystemModule.manager.name" labelValue="${eamSystemModule.manager.name}"
+								title="用户" url="/sys/office/treeData?type=3" allowClear="true" notAllowSelectParent="true"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -67,7 +72,8 @@
 					${eamSystemModule.chineseName}
 				</td>
 				<td>
-                    ${eamSystemModule.manager.name}
+					${eamSystemModule.manager.name}
+
 				</td>
 				<td>
 					<fmt:formatDate value="${eamSystemModule.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -77,7 +83,7 @@
 				</td>
 				<shiro:hasPermission name="sysmdl:eamSystemModule:edit"><td>
     				<a href="${ctx}/sysmdl/eamSystemModule/form?id=${eamSystemModule.id}">修改</a>
-					<a href="${ctx}/sysmdl/eamSystemModule/delete?id=${eamSystemModule.id}" onclick="return confirmx('确认要删除该模块吗？', this.href)">删除</a>
+					<a href="${ctx}/sysmdl/eamSystemModule/delete?id=${eamSystemModule.id}" onclick="return confirmx('确认要删除该系统模块吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

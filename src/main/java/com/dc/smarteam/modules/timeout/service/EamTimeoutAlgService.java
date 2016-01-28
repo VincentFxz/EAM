@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.timeout.entity.EamTimeoutAlg;
 import com.dc.smarteam.modules.timeout.dao.EamTimeoutAlgDao;
 
 /**
- * 超时时间管理Service
- * @author kern
- * @version 2015-12-24
+ * 超时算法管理Service
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

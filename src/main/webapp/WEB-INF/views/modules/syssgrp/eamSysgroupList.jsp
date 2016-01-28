@@ -28,9 +28,6 @@
 			<li><label>群组名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
-			<li><label>群组简称：</label>
-				<form:input path="chineseName" htmlEscape="false" maxlength="250" class="input-medium"/>
-			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

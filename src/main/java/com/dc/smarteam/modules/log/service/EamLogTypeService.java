@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.log.entity.EamLogType;
 import com.dc.smarteam.modules.log.dao.EamLogTypeDao;
 
 /**
- * 流水日志Service
- * @author kern
- * @version 2015-12-24
+ * 日志管理Service
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Service
 @Transactional(readOnly = true)

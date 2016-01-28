@@ -14,9 +14,9 @@ import com.dc.smarteam.modules.protocol.entity.EamProtocol;
 import com.dc.smarteam.modules.protocol.dao.EamProtocolDao;
 
 /**
- * 通讯协议管理Service
- * @author kern
- * @version 2015-12-24
+ * 协议管理Service
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 @Service
 @Transactional(readOnly = true)

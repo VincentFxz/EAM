@@ -8,9 +8,9 @@ import com.dc.smarteam.common.persistence.annotation.MyBatisDao;
 import com.dc.smarteam.modules.sysformat.entity.EamMsgFormat;
 
 /**
- * 报文格式DAO接口
+ * 报文格式管理DAO接口
  * @author zhanghaor
- * @version 2015-12-29
+ * @version 2016-01-22
  */
 @MyBatisDao
 public interface EamMsgFormatDao extends CrudDao<EamMsgFormat> {

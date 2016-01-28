@@ -3,34 +3,45 @@
  */
 package com.dc.smarteam.modules.sysnode.entity;
 
+import com.dc.smarteam.modules.protocol.entity.EamProtocol;
 import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import org.hibernate.validator.constraints.Length;
 
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 系统关联节点Entity
- * @author yangqjb
- * @version 2015-12-28
+ * 系统节点管理Entity
+ * @author zhanghaor
+ * @version 2016-01-25
  */
 public class EamLinknode extends DataEntity<EamLinknode> {
 	
 	private static final long serialVersionUID = 1L;
-	private String name;		// 名称
+	private String name;		// 节点名称
 	private String chineseName;		// 中文名称
-	private String eamSystemId;		// 节点系统ID
-    private String linknodeType;		// 节点类型
+	private String eamSystemId;		// 节点系统
+	private String linknodeType;		// 节点类型
+	private String eamProtocolId;		// 通讯协议
 
-    public EamSystem getEamSystem() {
-        return eamSystem;
-    }
+	private EamSystem eamSystem;//所属系统
+	private EamProtocol eamProtocol;//相关协议
 
-    public void setEamSystem(EamSystem eamSystem) {
-        this.eamSystem = eamSystem;
-    }
+	public EamSystem getEamSystem() {
+		return eamSystem;
+	}
 
-    private EamSystem eamSystem;		// 所属系统
-	
+	public void setEamSystem(EamSystem eamSystem) {
+		this.eamSystem = eamSystem;
+	}
+
+	public EamProtocol getEamProtocol() {
+		return eamProtocol;
+	}
+
+	public void setEamProtocol(EamProtocol eamProtocol) {
+		this.eamProtocol = eamProtocol;
+	}
+
 	public EamLinknode() {
 		super();
 	}
@@ -39,7 +50,7 @@ public class EamLinknode extends DataEntity<EamLinknode> {
 		super(id);
 	}
 
-	@Length(min=1, max=250, message="名称长度必须介于 1 和 250 之间")
+	@Length(min=1, max=250, message="节点名称长度必须介于 1 和 250 之间")
 	public String getName() {
 		return name;
 	}
@@ -48,7 +59,7 @@ public class EamLinknode extends DataEntity<EamLinknode> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=375, message="中文名称长度必须介于 0 和 375 之间")
+	@Length(min=0, max=250, message="中文名称长度必须介于 0 和 250 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -57,7 +68,7 @@ public class EamLinknode extends DataEntity<EamLinknode> {
 		this.chineseName = chineseName;
 	}
 	
-	@Length(min=0, max=40, message="节点系统ID长度必须介于 0 和 40 之间")
+	@Length(min=1, max=40, message="节点系统长度必须介于 1 和 40 之间")
 	public String getEamSystemId() {
 		return eamSystemId;
 	}
@@ -73,6 +84,15 @@ public class EamLinknode extends DataEntity<EamLinknode> {
 
 	public void setLinknodeType(String linknodeType) {
 		this.linknodeType = linknodeType;
+	}
+	
+	@Length(min=1, max=40, message="通讯协议长度必须介于 1 和 40 之间")
+	public String getEamProtocolId() {
+		return eamProtocolId;
+	}
+
+	public void setEamProtocolId(String eamProtocolId) {
+		this.eamProtocolId = eamProtocolId;
 	}
 	
 }

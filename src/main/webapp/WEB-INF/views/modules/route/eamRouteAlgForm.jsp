@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>交易路由管理</title>
+	<title>路由管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,9 +27,10 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/route/eamRouteAlg/">交易路由列表</a></li>
-		<li class="active"><a href="${ctx}/route/eamRouteAlg/form?id=${eamRouteAlg.id}">交易路由<shiro:hasPermission name="route:eamRouteAlg:edit">${not empty eamRouteAlg.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="route:eamRouteAlg:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/route/eamRouteAlg/">路由列表</a></li>
+		<li class="active"><a href="${ctx}/route/eamRouteAlg/form?id=${eamRouteAlg.id}">路由<shiro:hasPermission name="route:eamRouteAlg:edit">${not empty eamRouteAlg.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="route:eamRouteAlg:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
+	<div style="position:absolute;left:0px;width:80%">
 	<form:form id="inputForm" modelAttribute="eamRouteAlg" action="${ctx}/route/eamRouteAlg/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
@@ -43,7 +44,7 @@
 		<div class="control-group">
 			<label class="control-label">路由简称：</label>
 			<div class="controls">
-				<form:input path="chineseName" htmlEscape="false" maxlength="255" class="input-xlarge "/>
+				<form:input path="chineseName" htmlEscape="false" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -53,13 +54,13 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">RTABLE_MAINTAIN：</label>
+			<label class="control-label">路由表维护：</label>
 			<div class="controls">
 				<form:input path="rtableMaintain" htmlEscape="false" maxlength="255" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">RTABLE_STORE：</label>
+			<label class="control-label">路由表存储：</label>
 			<div class="controls">
 				<form:input path="rtableStore" htmlEscape="false" maxlength="255" class="input-xlarge "/>
 			</div>
@@ -70,16 +71,18 @@
 				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">删除标记：</label>
-			<div class="controls">
-				<form:input path="delFlg" htmlEscape="false" maxlength="1" class="input-xlarge "/>
-			</div>
-		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="route:eamRouteAlg:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	    </div>
+    <div style="position:absolute;left:80%">
+        <ul class="nav">
+            <!-- 请将 param 替换为具体参数 -->
+            <%--<li><a href="${ctx}/sysnode/eamLinknode/param?param=${param}">${not empty eamRouteAlg.id?'相关实体':''}</a></li><br>--%>
+            <%--<li><a href="${ctx}/sysnode/eamLinknode/param?param=${param}&param1=param1">${not empty eamRouteAlg.id?'相关实体':''}</a></li><br>--%>
+        </ul>
+    </div>
 </body>
 </html>

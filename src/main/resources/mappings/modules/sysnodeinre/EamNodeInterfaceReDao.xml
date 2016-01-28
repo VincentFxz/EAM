@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.smarteam.modules.sysnodeinre.dao.EamNodeInterfaceReDao">
+    
+	<sql id="eamNodeInterfaceReColumns">
+		a.id AS "id",
+		a.eam_linknode_id AS "eamLinknodeId",
+		a.eam_interface_id AS "eamInterfaceId",
+		a.del_flag AS "delFlag",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.create_by AS "createBy.id"
+	</sql>
+	
+	<sql id="eamNodeInterfaceReJoins">
+	</sql>
+    
+	<select id="get" resultType="EamNodeInterfaceRe">
+		SELECT 
+			<include refid="eamNodeInterfaceReColumns"/>
+		FROM eam_node_interface_re a
+		<include refid="eamNodeInterfaceReJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="EamNodeInterfaceRe">
+		SELECT 
+			<include refid="eamNodeInterfaceReColumns"/>
+		FROM eam_node_interface_re a
+		<include refid="eamNodeInterfaceReJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="eamLinknodeId != null and eamLinknodeId != ''">
+				AND a.eam_linknode_id = #{eamLinknodeId}
+			</if>
+			<if test="eamInterfaceId != null and eamInterfaceId != ''">
+				AND a.eam_interface_id = #{eamInterfaceId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EamNodeInterfaceRe">
+		SELECT 
+			<include refid="eamNodeInterfaceReColumns"/>
+		FROM eam_node_interface_re a
+		<include refid="eamNodeInterfaceReJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO eam_node_interface_re(
+			id,
+			eam_linknode_id,
+			eam_interface_id,
+			del_flag,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			create_by
+		) VALUES (
+			#{id},
+			#{eamLinknodeId},
+			#{eamInterfaceId},
+			#{delFlag},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{createBy.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE eam_node_interface_re SET 	
+			eam_linknode_id = #{eamLinknodeId},
+			eam_interface_id = #{eamInterfaceId},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE eam_node_interface_re SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

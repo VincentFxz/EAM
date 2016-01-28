@@ -4,15 +4,21 @@
     
 	<sql id="eamSystemColumns">
 		a.id AS "id",
-		a.name AS "name",
+		a.no AS "no",
 		a.chinese_name AS "chineseName",
+		a.name AS "name",
+		a.english_name AS "englishName",
+		a.english_short AS "englishShort",
+		a.alias AS "alias",
 		a.eam_bank AS "eamBank",
 		a.eam_sysgroup_id AS "eamSysgroupId",
 		a.eam_aa_layer_id AS "eamAaLayerId",
-		a.eam_org_layer_id AS "eamOrgLayerId",
+		a.eam_org_layer AS "eamOrgLayer",
 		a.eam_build_type AS "eamBuildType",
 		a.eam_build_state AS "eamBuildState",
+		a.online_date AS "onlineDate",
 		a.eam_trend AS "eamTrend",
+		a.target_system AS "targetSystem",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
@@ -45,11 +51,11 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
-			<if test="chineseName != null and chineseName != ''">
-				AND a.chinese_name = #{chineseName}
+			<if test="eamSysgroupId != null and eamSysgroupId != ''">
+				AND a.eam_sysgroup_id = #{eamSysgroupId}
 			</if>
-			<if test="eamBuildState != null and eamBuildState != ''">
-				AND a.eam_build_state = #{eamBuildState}
+			<if test="eamAaLayerId != null and eamAaLayerId != ''">
+				AND a.eam_aa_layer_id = #{eamAaLayerId}
 			</if>
 		</where>
 		<choose>
@@ -83,15 +89,21 @@
 	<insert id="insert">
 		INSERT INTO eam_system(
 			id,
-			name,
+			no,
 			chinese_name,
+			name,
+			english_name,
+			english_short,
+			alias,
 			eam_bank,
 			eam_sysgroup_id,
 			eam_aa_layer_id,
-			eam_org_layer_id,
+			eam_org_layer,
 			eam_build_type,
 			eam_build_state,
+			online_date,
 			eam_trend,
+			target_system,
 			create_by,
 			create_date,
 			update_by,
@@ -100,15 +112,21 @@
 			del_flag
 		) VALUES (
 			#{id},
-			#{name},
+			#{no},
 			#{chineseName},
+			#{name},
+			#{englishName},
+			#{englishShort},
+			#{alias},
 			#{eamBank},
 			#{eamSysgroupId},
 			#{eamAaLayerId},
-			#{eamOrgLayerId},
+			#{eamOrgLayer},
 			#{eamBuildType},
 			#{eamBuildState},
+			#{onlineDate},
 			#{eamTrend},
+			#{targetSystem},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -120,15 +138,21 @@
 	
 	<update id="update">
 		UPDATE eam_system SET 	
-			name = #{name},
+			no = #{no},
 			chinese_name = #{chineseName},
+			name = #{name},
+			english_name = #{englishName},
+			english_short = #{englishShort},
+			alias = #{alias},
 			eam_bank = #{eamBank},
 			eam_sysgroup_id = #{eamSysgroupId},
 			eam_aa_layer_id = #{eamAaLayerId},
-			eam_org_layer_id = #{eamOrgLayerId},
+			eam_org_layer = #{eamOrgLayer},
 			eam_build_type = #{eamBuildType},
 			eam_build_state = #{eamBuildState},
+			online_date = #{onlineDate},
 			eam_trend = #{eamTrend},
+			target_system = #{targetSystem},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}

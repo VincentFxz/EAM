@@ -3,28 +3,35 @@
  */
 package com.dc.smarteam.modules.sysstr.entity;
 
+import com.dc.smarteam.modules.sysmng.entity.EamSystem;
 import org.hibernate.validator.constraints.Length;
 
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
-<<<<<<< HEAD:src/main/java/com/dc/smarteam/modules/sysstr/entity/EamAaStrategy.java
- * 应用系统决策管理Entity
- * @author yangqjb
-=======
- * 决策点管理Entity
+ * 系统决策管理Entity
  * @author zhanghaor
->>>>>>> 5220b94db6a71e15f247e574d1634f41421384aa:src/main/java/com/dc/smarteam/modules/strategy/entity/EamAaStrategy.java
- * @version 2015-12-24
+ * @version 2016-01-21
  */
 public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 决策点名称
 	private String chineseName;		// 决策点中文名
+	private String eamSystemId;		// 所属系统
 	private String strategyProcess;		// 决策过程
 	private String conclusion;		// 结论
-	
+
+	private EamSystem eamSystem;
+
+	public EamSystem getEamSystem() {
+		return eamSystem;
+	}
+
+	public void setEamSystem(EamSystem eamSystem) {
+		this.eamSystem = eamSystem;
+	}
+
 	public EamAaStrategy() {
 		super();
 	}
@@ -42,7 +49,6 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=375, message="决策点中文名长度必须介于 0 和 375 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -51,7 +57,15 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.chineseName = chineseName;
 	}
 	
-	@Length(min=0, max=2000, message="决策过程长度必须介于 0 和 2000 之间")
+	@Length(min=1, max=40, message="所属系统长度必须介于 1 和 40 之间")
+	public String getEamSystemId() {
+		return eamSystemId;
+	}
+
+	public void setEamSystemId(String eamSystemId) {
+		this.eamSystemId = eamSystemId;
+	}
+	
 	public String getStrategyProcess() {
 		return strategyProcess;
 	}
@@ -60,7 +74,6 @@ public class EamAaStrategy extends DataEntity<EamAaStrategy> {
 		this.strategyProcess = strategyProcess;
 	}
 	
-	@Length(min=0, max=2000, message="结论长度必须介于 0 和 2000 之间")
 	public String getConclusion() {
 		return conclusion;
 	}

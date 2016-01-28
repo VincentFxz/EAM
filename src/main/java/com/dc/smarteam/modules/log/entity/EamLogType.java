@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.dc.smarteam.common.persistence.DataEntity;
 
 /**
- * 流水日志Entity
- * @author kern
- * @version 2015-12-24
+ * 日志管理Entity
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 public class EamLogType extends DataEntity<EamLogType> {
 	
@@ -19,7 +19,7 @@ public class EamLogType extends DataEntity<EamLogType> {
 	private String chineseName;		// 日志简称
 	private String logRange;		// 日志级别
 	private String logCleanType;		// 日志清理规则
-	private String delFlg;		// 删除标记
+	private String delFlg;		// 删除标记（0：正常；1：删除）
 	
 	public EamLogType() {
 		super();
@@ -29,7 +29,7 @@ public class EamLogType extends DataEntity<EamLogType> {
 		super(id);
 	}
 
-	@Length(min=0, max=255, message="日志名称长度必须介于 0 和 255 之间")
+	@Length(min=1, max=255, message="日志名称长度必须介于 1 和 255 之间")
 	public String getName() {
 		return name;
 	}
@@ -38,7 +38,6 @@ public class EamLogType extends DataEntity<EamLogType> {
 		this.name = name;
 	}
 	
-	@Length(min=0, max=255, message="日志简称长度必须介于 0 和 255 之间")
 	public String getChineseName() {
 		return chineseName;
 	}
@@ -65,7 +64,7 @@ public class EamLogType extends DataEntity<EamLogType> {
 		this.logCleanType = logCleanType;
 	}
 	
-	@Length(min=0, max=1, message="删除标记长度必须介于 0 和 1 之间")
+	@Length(min=1, max=1, message="删除标记（0：正常；1：删除）长度必须介于 1 和 1 之间")
 	public String getDelFlg() {
 		return delFlg;
 	}

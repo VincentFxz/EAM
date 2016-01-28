@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>关联关系管理</title>
+	<title>节点关联管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,14 +27,15 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/syslink/eamSyslink/">关联关系列表</a></li>
-		<li class="active"><a href="${ctx}/syslink/eamSyslink/form?id=${eamSyslink.id}">关联关系<shiro:hasPermission name="syslink:eamSyslink:edit">${not empty eamSyslink.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="syslink:eamSyslink:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/syslink/eamSyslink/">节点关联列表</a></li>
+		<li class="active"><a href="${ctx}/syslink/eamSyslink/form?id=${eamSyslink.id}">节点关联<shiro:hasPermission name="syslink:eamSyslink:edit">${not empty eamSyslink.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="syslink:eamSyslink:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
+	<div style="position:absolute;left:0px;width:80%">
 	<form:form id="inputForm" modelAttribute="eamSyslink" action="${ctx}/syslink/eamSyslink/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">名称：</label>
+			<label class="control-label">关系名称：</label>
 			<div class="controls">
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-xlarge "/>
 			</div>
@@ -42,34 +43,60 @@
 		<div class="control-group">
 			<label class="control-label">中文名称：</label>
 			<div class="controls">
-				<form:input path="chineseName" htmlEscape="false" maxlength="375" class="input-xlarge "/>
+				<form:input path="chineseName" htmlEscape="false" maxlength="250" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">类型：</label>
+			<label class="control-label">关联关系类型：</label>
 			<div class="controls">
 				<form:select path="linkType" class="input-xlarge ">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('link_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<sys:dict description="关联关系类型" type="link_type" sort="${(fns:getDictList('link_type').size()+1)*30}"/>
+
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">起始系统：</label>
+			<div class="controls">
+				<form:select path="eamSystemStartId" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${eamSystemStartIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">起始节点：</label>
 			<div class="controls">
-				<form:select path="startLinknodeId" class="input-xlarge ">
+				<form:select path="startLinknodeId" class="input-xlarge required">
 					<form:option value="" label=""/>
-					<form:options items="${start_nodes}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					<form:options items="${startLinknodeIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
+
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">终止系统：</label>
+			<div class="controls">
+				<form:select path="eamSystemEndId" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${eamSystemEndIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">终止节点：</label>
 			<div class="controls">
-				<form:select path="endLinknodeId" class="input-xlarge ">
+				<form:select path="endLinknodeId" class="input-xlarge required">
 					<form:option value="" label=""/>
-					<form:options items="${start_nodes}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					<form:options items="${endLinknodeIdList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
+
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -79,6 +106,8 @@
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('link_status')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
+				<sys:dict description="关联关系状态" type="link_status" sort="${(fns:getDictList('link_status').size()+1)*30}"/>
+
 			</div>
 		</div>
 		<div class="control-group">
@@ -92,5 +121,13 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	    </div>
+    <div style="position:absolute;left:80%">
+        <ul class="nav">
+            <!-- 请将 param 替换为具体参数 -->
+            <li><a href="${ctx}/sysnode/eamLinknode/param?param=${param}">${not empty eamSyslink.id?'相关实体':''}</a></li><br>
+            <li><a href="${ctx}/sysnode/eamLinknode/param?param=${param}&param1=param1">${not empty eamSyslink.id?'相关实体':''}</a></li><br>
+        </ul>
+    </div>
 </body>
 </html>

@@ -25,11 +25,11 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<%--<li><label>UUID：</label>--%>
+				<%--<form:input path="id" htmlEscape="false" maxlength="40" class="input-medium"/>--%>
+			<%--</li>--%>
 			<li><label>架构层次名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="250" class="input-medium"/>
-			</li>
-			<li><label>架构层次简称：</label>
-				<form:input path="chineseName" htmlEscape="false" maxlength="250" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>

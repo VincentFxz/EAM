@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dc.smarteam.common.config.Global;
@@ -23,9 +24,9 @@ import com.dc.smarteam.modules.flow.entity.EamFlowCtlAlg;
 import com.dc.smarteam.modules.flow.service.EamFlowCtlAlgService;
 
 /**
- * 流控算法管理模块Controller
- * @author kern
- * @version 2015-12-24
+ * 流控管理Controller
+ * @author zhanghaor
+ * @version 2016-01-22
  */
 @Controller
 @RequestMapping(value = "${adminPath}/flow/eamFlowCtlAlg")
@@ -55,6 +56,16 @@ public class EamFlowCtlAlgController extends BaseController {
 	}
 
 	@RequiresPermissions("flow:eamFlowCtlAlg:view")
+	@RequestMapping(value = "/param")
+	public String listbysearch(
+	HttpServletRequest request, HttpServletResponse response, Model model) {
+	    EamFlowCtlAlg eamFlowCtlAlg = new EamFlowCtlAlg();
+		Page<EamFlowCtlAlg> page = eamFlowCtlAlgService.findPage(new Page<EamFlowCtlAlg>(request, response), eamFlowCtlAlg);
+		model.addAttribute("page", page);
+		return "modules/flow/eamFlowCtlAlgList";
+	}
+
+	@RequiresPermissions("flow:eamFlowCtlAlg:view")
 	@RequestMapping(value = "form")
 	public String form(EamFlowCtlAlg eamFlowCtlAlg, Model model) {
 		model.addAttribute("eamFlowCtlAlg", eamFlowCtlAlg);
@@ -68,7 +79,7 @@ public class EamFlowCtlAlgController extends BaseController {
 			return form(eamFlowCtlAlg, model);
 		}
 		eamFlowCtlAlgService.save(eamFlowCtlAlg);
-		addMessage(redirectAttributes, "保存流控算法管理模块成功");
+		addMessage(redirectAttributes, "保存流控成功");
 		return "redirect:"+Global.getAdminPath()+"/flow/eamFlowCtlAlg/?repage";
 	}
 	
@@ -76,7 +87,7 @@ public class EamFlowCtlAlgController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(EamFlowCtlAlg eamFlowCtlAlg, RedirectAttributes redirectAttributes) {
 		eamFlowCtlAlgService.delete(eamFlowCtlAlg);
-		addMessage(redirectAttributes, "删除流控算法管理模块成功");
+		addMessage(redirectAttributes, "删除流控成功");
 		return "redirect:"+Global.getAdminPath()+"/flow/eamFlowCtlAlg/?repage";
 	}
 
